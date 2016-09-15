@@ -1,0 +1,35 @@
+server:
+  type: simple
+  applicationContextPath: /server-baymaxpi/api
+  adminContextPath: /server-baymaxpi/admin
+  connector:
+    type: http
+    port: 9050
+    
+
+logging:
+  level: INFO
+  loggers:
+    io.dropwizard: INFO
+  appenders:
+    - type: console
+      threshold: ALL
+      timeZone: UTC
+      target: stdout
+      logFormat: # TODO
+    - type: file
+      currentLogFilename: ./logs/content-manager.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: ./logs/content-manager-%d.log
+      archivedFileCount: 50
+      timeZone: UTC
+      logFormat: # TODO
+      
+mongoDBConfig:
+
+  dbName: baymaxPi
+  dbUser: baymaxPi
+  dbPassword: baymaxPiPsw
+  dbAddresses: 
+    - localhost

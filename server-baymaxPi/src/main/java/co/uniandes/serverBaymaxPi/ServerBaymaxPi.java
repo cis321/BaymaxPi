@@ -17,13 +17,11 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 
-import co.certicamara.authmanager.client.filter.RequestFilter;
-import co.certicamara.authmanager.client.provider.TokenDTOProvider;
-import co.uniandes.serverBaymaxPi.api.resources.ContentResource;
-import co.uniandes.serverBaymaxPi.domain.business.ContentBusiness;
+import co.uniandes.serverBaymaxPi.api.resources.MedicalDataResource;
+import co.uniandes.serverBaymaxPi.domain.business.MedicalDataBusiness;
 import co.uniandes.serverBaymaxPi.infrasctructure.config.ContentManagerConfig;
 import co.uniandes.serverBaymaxPi.infrasctructure.config.MongoDBConfig;
-import co.uniandes.serverBaymaxPi.persistence.db.datamappers.ContentDataMapper;
+import co.uniandes.serverBaymaxPi.persistence.db.datamappers.MedicalDataDataMapper;
 import io.dropwizard.Application;
 import io.dropwizard.java8.Java8Bundle;
 import io.dropwizard.setup.Bootstrap;
@@ -34,7 +32,7 @@ import io.dropwizard.setup.Environment;
  * 
  * @author LeanFactory
  */
-public class ContentManager extends Application<ContentManagerConfig> {
+public class ServerBaymaxPi extends Application<ContentManagerConfig> {
 
     private MongoClient mongoClient;
 
@@ -55,7 +53,7 @@ public class ContentManager extends Application<ContentManagerConfig> {
 
         try {
 
-            ContentManager auditorManager = new ContentManager();
+            ServerBaymaxPi auditorManager = new ServerBaymaxPi();
             auditorManager.run(args);
 
         } catch (Exception e) {
@@ -75,17 +73,13 @@ public class ContentManager extends Application<ContentManagerConfig> {
 
         MongoDatabase mongoDatabase = getMongoDatabase(contentManagerConfig);
 
-        // Add authentication and authorization filter
-        addAuthManagerFilterAndProvider(environment,
-                contentManagerConfig.getContentManagerServiceClients().getAutheoUrl());
-
         initializeCORSSettings(environment);
         configureJacksonObjectMapper(environment);
         ObjectMapper objectMapper = environment.getObjectMapper();
-        ContentDataMapper contentDataMapper = new ContentDataMapper(objectMapper);
-        ContentBusiness contentBusiness = new ContentBusiness(contentDataMapper, mongoDatabase);
+        MedicalDataDataMapper contentDataMapper = new MedicalDataDataMapper(objectMapper);
+        MedicalDataBusiness contentBusiness = new MedicalDataBusiness(contentDataMapper, mongoDatabase);    
         
-        environment.jersey().register(new ContentResource(contentBusiness));
+        environment.jersey().register(new MedicalDataResource(contentBusiness));
     }
 
     ///////////////////////////////////
@@ -114,20 +108,6 @@ public class ContentManager extends Application<ContentManagerConfig> {
         filter.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM,
                 "X-Requested-With,Content-Type,Content-Length,Accept,Origin,Authorization");
         filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
-    }
-
-    /**
-     * Authentication filter
-     * 
-     * @param environment
-     */
-    private void addAuthManagerFilterAndProvider(Environment environment, String authManagerUri) {
-
-        String urlPattern = "/*";
-
-        environment.servlets().addFilter("autheoFilter", new RequestFilter(authManagerUri + "/tokens"))
-                .addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, urlPattern);
-        environment.jersey().register(TokenDTOProvider.class);
     }
 
     private MongoDatabase getMongoDatabase(ContentManagerConfig contentManagerConfig) throws UnknownHostException {
