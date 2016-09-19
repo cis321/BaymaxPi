@@ -1,10 +1,11 @@
 package co.uniandes.serverBaymaxPi.api.resources;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -12,34 +13,33 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import co.uniandes.serverBaymaxPi.domain.business.MedicalDataBusiness;
+import co.uniandes.serverBaymaxPi.domain.entities.SensorBeat;
 import co.uniandes.serverBaymaxPi.infrasctructure.exceptions.BusinessException;
 import co.uniandes.serverBaymaxPi.infrasctructure.exceptions.ExceptionCodes;
 import co.uniandes.serverBaymaxPi.infrasctructure.exceptions.IException;
 import fj.data.Either;
 
-@Path("/content-web")
+@Path("/medical-data")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class MedicalDataResource {
 
-    private final MedicalDataBusiness contentBusiness;
+    private final MedicalDataBusiness medicalDataBusiness;
     private final static Logger LOGGER = LoggerFactory.getLogger(MedicalDataResource.class);
 
-    public MedicalDataResource(MedicalDataBusiness contentBusiness) {
-        this.contentBusiness = contentBusiness;
+    public MedicalDataResource(MedicalDataBusiness medicalDataBusiness) {
+        this.medicalDataBusiness = medicalDataBusiness;
     }
 
     @POST
-    @Path("/tmpfile")
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createTemporalFile(@QueryParam("fileName") String fileName) {
+    public Response createTemporalFile(List<SensorBeat> sensorBeatList) {
 
         Response response;
-        fileName = fileName.toLowerCase();
         try {
 
-            Either<IException, String> either = contentBusiness.ok();
+            Either<IException, String> either = medicalDataBusiness.ok();
 
             if (either.isRight()) {
 

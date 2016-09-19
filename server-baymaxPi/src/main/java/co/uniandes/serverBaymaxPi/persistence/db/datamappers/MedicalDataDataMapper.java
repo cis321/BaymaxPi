@@ -20,7 +20,7 @@ public class MedicalDataDataMapper {
 
 	private static final String MONGO_ID = "_id";
 
-	private static final String CONTENT_WEB_COLLECTION = "content_web_";
+	private static final String MEDICAL_DATA_COLLECTION = "medial_data";
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(MedicalDataDataMapper.class);
 
@@ -36,7 +36,7 @@ public class MedicalDataDataMapper {
 
 		try {
 
-			MongoCollection<Document> collection = mongoDB.getCollection(CONTENT_WEB_COLLECTION + tenantId);
+			MongoCollection<Document> collection = mongoDB.getCollection(MEDICAL_DATA_COLLECTION + tenantId);
 
 			MongoCursor<Document> result = collection.find().iterator();
 
