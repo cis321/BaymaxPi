@@ -1,4 +1,21 @@
 <resources>
     <string name="app_name">BaymaxPi</string>
     <string name="action_settings">Settings</string>
+
+    <string name="action_registro">Completar Registro</string>
+
+    <string name="M">Masculino</string>
+    <string name="F">Femenino</string>
+    <string name="H">Homosexual</string>
+
+    <array name="generoSpinnerOptions">
+        <item>@string/M</item>
+        <item>@string/F</item>
+        <item>@string/H</item>
+    </array>
+
+    <string name="cannot_be_empty">Este Campo no puede ser vacío</string>
+
+
+
 </resources>

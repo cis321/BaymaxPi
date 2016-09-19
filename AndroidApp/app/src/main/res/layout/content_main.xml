@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="co.edu.uniandes.baymaxpi.baymaxpi.MainActivity"
+    tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
     <GridLayout
@@ -43,6 +43,7 @@
             android:layout_row="1"
             android:layout_column="1"
             android:textAlignment="center"
+            android:textColor="@color/primary"
             android:textSize="20dp" />
 
         <ImageButton
@@ -62,6 +63,7 @@
             android:layout_row="3"
             android:layout_column="1"
             android:textAlignment="center"
+            android:textColor="@color/primary"
             android:textSize="20dp" />
 
         <ImageButton
@@ -81,6 +83,7 @@
             android:layout_row="5"
             android:layout_column="1"
             android:textAlignment="center"
+            android:textColor="@color/primary"
             android:textSize="20dp" />
 
     </GridLayout>
