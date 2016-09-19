@@ -1,0 +1,224 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistroActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin">
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nombre Completo"
+                android:textCursorDrawable="@drawable/text_cursor_primary"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="?colorPrimary"
+                android:id="@+id/nombreText"
+                android:textSize="18dp"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/generoLabel"
+                android:id="@+id/generoSpinner"
+                android:layout_marginBottom="3dp"
+                android:paddingTop="6dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Genero"
+                android:id="@+id/generoLabel"
+                android:layout_below="@+id/nombreText"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="12dp"
+                android:textColor="#ff949494"
+                android:layout_marginBottom="3dp"/>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cédula de Ciudadanía"
+                android:textCursorDrawable="@drawable/text_cursor_primary"
+                android:layout_below="@+id/generoSpinner"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="?colorPrimary"
+                android:id="@+id/cedulaText"
+                android:textSize="18dp"
+                />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_below="@+id/cedulaText"
+                android:id="@+id/linearButtons"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Fecha de Nacimiento"
+                        android:id="@+id/nacimientoLabel"                    android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:textSize="12dp"
+                        android:textColor="#ff949494"
+                        android:layout_marginBottom="3dp"/>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/nacimientoLabel"
+                        android:text="Fecha"
+                        android:id="@+id/fechaButton"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:text="Mayo 17, 2015"
+                        android:id="@+id/fechaLabel"
+                        android:textSize="16dp"
+                        android:gravity="center"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Medicamentos"
+                android:textCursorDrawable="@drawable/text_cursor_primary"
+                android:layout_below="@+id/linearButtons"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="?colorPrimary"
+                android:id="@+id/medicamentosText"
+                app:met_helperText="Medicamentos separados por coma (,)"
+                android:textSize="18dp"
+                />
+
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Actividad física"
+                android:textCursorDrawable="@drawable/text_cursor_primary"
+                android:layout_below="@+id/medicamentosText"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="?colorPrimary"
+                app:met_helperText="Actividades realizadas separadas por coma (,)"
+                android:id="@+id/actFisicaText"
+                app:met_singleLineEllipsis="true"
+                android:textSize="18dp"
+                />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Alimentos regulares"
+                android:textCursorDrawable="@drawable/text_cursor_primary"
+                android:layout_below="@+id/actFisicaText"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="?colorPrimary"
+                android:id="@+id/alimentosYBebidasText"
+                app:met_helperText="Alimentos/bebidas separados por coma (,)"
+                android:textSize="18dp"
+                />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="EPS"
+                android:textCursorDrawable="@drawable/text_cursor_primary"
+                android:layout_below="@+id/alimentosYBebidasText"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="?colorPrimary"
+                android:id="@+id/epsText"
+                app:met_helperText="Eps a la que está vinculado"
+                android:textSize="18dp"
+                />
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Correo Electrónico"
+                android:textCursorDrawable="@drawable/text_cursor_primary"
+                android:layout_below="@+id/epsText"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="?colorPrimary"
+                android:id="@+id/correoText"
+                android:textSize="18dp"
+                />
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Dirección Actual"
+                android:textCursorDrawable="@drawable/text_cursor_primary"
+                android:layout_below="@+id/correoText"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="?colorPrimary"
+                android:id="@+id/direccionText"
+                android:textSize="18dp"
+                />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registrar"
+                android:id="@+id/registrarButton"
+                android:layout_below="@+id/direccionText"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="#0fff"
+                android:textStyle="bold"
+                android:textColor="@color/primary"
+                android:layout_alignParentBottom="true" />
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveProgressBar"
+                android:layout_above="@+id/linearButtons"
+                android:layout_centerHorizontal="true"
+                android:visibility="invisible"/>
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/uploadProgressBar"
+                android:layout_above="@+id/linearButtons"
+                android:layout_centerHorizontal="true"
+                android:max="100"
+                android:visibility="invisible"/>
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
