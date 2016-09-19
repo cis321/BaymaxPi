@@ -2,11 +2,13 @@ package co.edu.uniandes.baymaxpi.baymaxpi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,7 +20,10 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -55,7 +60,64 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+
+                Calendar c = Calendar.getInstance();
+
+                final File file = new File(Environment.getExternalStorageDirectory().
+                        getAbsolutePath() + "/" + "DatosMedicos");
+                if(!file.exists())
+                {
+                    file.mkdirs();
+                }
+                if (file.exists()){
+                    String path = Environment.getExternalStorageDirectory().
+                            getAbsolutePath() + "/DatosMedicos/" + paciente.getCedula() + ".txt";
+                    Log.d("MedicionPaciente", path);
+                    File newFile = new File(path);
+                    file.renameTo(newFile);
+                    try {
+
+                        FileWriter writer = new FileWriter(file);
+                        writer.append("Fecha: "+ c.getTime());
+                        Double temperatura = Math.random()*40 + 35;
+                        if(temperatura > 35 && temperatura < 40) {
+                            String temp = temperatura + "";
+                            writer.append("Temperatura: "+ temp);
+                        }
+                        Double saturacion = Math.random()*100 + 89;
+                        if(saturacion > 89 && saturacion < 100) {
+                            String sat = saturacion + "";
+                            writer.append("Saturacion: "+ sat);
+                        }
+                        Double pulso = Math.random()*110 + 60;
+                        if(pulso > 60 && pulso < 110) {
+                            String pulse = pulso + "";
+                            writer.append("Pulso: "+ pulse);
+                        }
+                        Double piel = Math.random()*25;
+                        if(piel > 0 && piel < 25) {
+                            String skin = piel + "";
+                            writer.append("Piel: "+ skin);
+                        }
+                        Double presionSistolica = Math.random()*150 + 110;
+                        if(presionSistolica > 110 && pulso < 150) {
+                            String preSis = presionSistolica + "";
+                            writer.append("Presion Sistolica: "+ preSis);
+                        }
+                        Double presionDiastolica = Math.random()*90 + 70;
+                        if(presionDiastolica > 70 && pulso < 90) {
+                            String preDias = presionDiastolica + "";
+                            writer.append("Presion Diastolica: "+ preDias);
+                        }
+                        writer.flush();
+                        writer.close();
+
+                    } catch (Exception e1) {
+                        Log.d("DatosMedicos", e1.getMessage());
+                    }
+                }
+
+                Snackbar.make(view, "Se ha creado el archivo de datos en " + file.getAbsolutePath()+"/"+paciente.getCedula()+".txt", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -143,6 +205,11 @@ public class MainActivity extends AppCompatActivity {
     public void onBtnProfileClicked(View view){
         Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
         MainActivity.this.startActivity(profileIntent);
+    }
+
+    public void onBtnEstadisticasClicked(View view){
+        Intent estadisticasIntent = new Intent(MainActivity.this, EstadisticasActivity.class);
+        MainActivity.this.startActivity(estadisticasIntent);
     }
 
 
