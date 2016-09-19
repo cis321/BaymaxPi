@@ -63,9 +63,30 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Fecha Nacimiento:"
+            android:id="@+id/textNacimiento"
+            android:layout_below="@+id/textEmail"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Direccion:"
+            android:id="@+id/textDireccion"
+            android:layout_below="@+id/textNacimiento"
+            android:layout_row="5"
+            android:layout_column="0"
+            android:textSize="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="HealthStatus"
             android:id="@+id/textHealthStatus"
-            android:layout_row="4"
+            android:layout_below="@+id/textDireccion"
+            android:layout_row="6"
             android:layout_column="1"
             android:textSize="20dp" />
 
@@ -73,7 +94,8 @@
             android:layout_width="118dp"
             android:layout_height="123dp"
             android:id="@+id/imageStatus"
-            android:layout_row="5"
+            android:layout_below="@+id/textHealthStatus"
+            android:layout_row="7"
             android:layout_column="1"
             android:src="@mipmap/check_ok_icon" />
     </GridLayout>

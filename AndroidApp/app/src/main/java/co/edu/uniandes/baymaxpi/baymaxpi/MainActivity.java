@@ -21,6 +21,7 @@ import com.parse.ParseUser;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
 import co.edu.uniandes.baymaxpi.baymaxpi.Models.Paciente;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,8 +39,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ButterKnife.inject(this);
+
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser == null){
+        if (currentUser == null||paciente== null){
             suggestLogin();
         } else {
             actualizarPaciente();
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void actualizarPaciente() {
         ParseQuery<ParseObject> pacienteQuery = ParseQuery.getQuery("Paciente");
@@ -140,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         Intent profileIntent = new Intent(MainActivity.this, ProfileActivity.class);
         MainActivity.this.startActivity(profileIntent);
     }
+
 
 
 }
