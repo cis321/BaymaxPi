@@ -111,6 +111,7 @@ public class RegistroActivity extends AppCompatActivity implements DatePickerDia
 
         final File file = new File(Environment.getExternalStorageDirectory().
                 getAbsolutePath() + "/" + "Registros");
+
         if(!file.exists())
         {
             file.mkdirs();
@@ -169,7 +170,6 @@ public class RegistroActivity extends AppCompatActivity implements DatePickerDia
         final String[] fAlimentos = alimentosYBebidas;
         final String[] fActividades = actividadFisica;
 
-
         if (dataCompleteFlag) {
 
             final ParseObject paciente = new ParseObject("Paciente");
@@ -192,8 +192,9 @@ public class RegistroActivity extends AppCompatActivity implements DatePickerDia
                     ParseFile parseFile = null;
 
                     if (file.exists()){
+
                         String path = Environment.getExternalStorageDirectory().
-                                getAbsolutePath() + "/" + paciente.getObjectId() + ".txt";
+                                getAbsolutePath() + "/registro.txt";
                         Log.d("RegistroPaciente", path);
                         File newFile = new File(path);
                         file.renameTo(newFile);
@@ -201,16 +202,8 @@ public class RegistroActivity extends AppCompatActivity implements DatePickerDia
                         try {
 
                             FileWriter writer = new FileWriter(file);
-                            writer.append("Nombre: "+ fNombre);
-                            writer.append("Cedula: "+ fCedula);
-                            writer.append("Correo: "+ fCorreo);
-                            writer.append("Eps: "+ fEps);
-                            writer.append("FechaNacimiento: "+ fFecha);
-                            writer.append("Genero: "+ fGenero);
-                            writer.append("Dirección: "+ fDireccion);
-                            writer.append("Medicamentos: "+ fMedicamentos);
-                            writer.append("Activiades: "+ fActividades);
-                            writer.append("Alimentos: "+ fAlimentos);
+
+                            writer.append(fNombre + "," + fEps + "," + fCedula + "," + fCorreo + "," + fFecha + "," + fDireccion);
                             writer.flush();
                             writer.close();
 
@@ -232,7 +225,6 @@ public class RegistroActivity extends AppCompatActivity implements DatePickerDia
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-
     }
 
 
@@ -250,7 +242,7 @@ public class RegistroActivity extends AppCompatActivity implements DatePickerDia
         String monthName = cal.getDisplayName(Calendar.MONTH, Calendar.LONG, spanish);
         monthName = monthName.substring(0,1).toUpperCase() + monthName.substring(1);
 
-        String date = monthName + " " + dayOfMonth + ", " + year;  //dayOfMonth+"/"+monthOfYear+"/"+year;
+        String date = monthName + " " + dayOfMonth + ", " + year;
         mFechaText.setText(date);
 
     }

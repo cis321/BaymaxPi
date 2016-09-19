@@ -141,13 +141,13 @@
                 android:layout_height="wrap_content"
                 android:hint="Alimentos regulares"
                 android:textCursorDrawable="@drawable/text_cursor_primary"
-                android:layout_below="@+id/actFisicaText"
                 app:met_floatingLabel="highlight"
                 app:met_primaryColor="?colorPrimary"
                 android:id="@+id/alimentosYBebidasText"
                 app:met_helperText="Alimentos/bebidas separados por coma (,)"
                 android:textSize="18dp"
-                />
+                android:layout_below="@+id/actFisicaText"
+                android:layout_alignParentStart="true" />
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"

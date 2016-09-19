@@ -22,6 +22,8 @@ import com.parse.ParseUser;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -47,10 +49,15 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.inject(this);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser == null||paciente== null){
+
+        try{
+
+            String path = Environment.getExternalStorageDirectory().
+                    getAbsolutePath() + "/Registros";
+            BufferedReader br = new BufferedReader(new FileReader(path));
+        } catch (Exception e){
+
             suggestLogin();
-        } else {
-            actualizarPaciente();
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
