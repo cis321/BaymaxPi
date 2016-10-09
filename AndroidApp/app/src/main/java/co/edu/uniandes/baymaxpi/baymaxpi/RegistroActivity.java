@@ -155,7 +155,7 @@ public class RegistroActivity extends AppCompatActivity implements DatePickerDia
             dataCompleteFlag = false;
         }
 
-        String[] medicamentos = mMedicamentosText.getText().toString().trim().split(",");
+        String medicamentos = mMedicamentosText.getText().toString();
         String[] actividadFisica = mActFisicaText.getText().toString().trim().split(",");
         String[] alimentosYBebidas = mAlimentosYBebidasText.getText().toString().split(",");
 
@@ -166,7 +166,7 @@ public class RegistroActivity extends AppCompatActivity implements DatePickerDia
         final String fCedula = cedula;
         final String fFecha = fecha;
         final String fGenero = genero;
-        final String[] fMedicamentos = medicamentos;
+        final String fMedicamentos = medicamentos;
         final String[] fAlimentos = alimentosYBebidas;
         final String[] fActividades = actividadFisica;
 
@@ -203,7 +203,7 @@ public class RegistroActivity extends AppCompatActivity implements DatePickerDia
 
                             FileWriter writer = new FileWriter(file);
 
-                            writer.append(fNombre + "," + fEps + "," + fCedula + "," + fCorreo + "," + fFecha + "," + fDireccion);
+                            writer.append(fNombre + "," + fEps + "," + fCedula + "," + fCorreo + "," + fFecha + "," + fDireccion + "," + fMedicamentos);
                             writer.flush();
                             writer.close();
 

@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Paciente paciente = new Paciente();
 
+    private String telefonoDoctor;
+
 
     private View view;
 
@@ -55,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
             String path = Environment.getExternalStorageDirectory().
                     getAbsolutePath() + "/Registros";
             BufferedReader br = new BufferedReader(new FileReader(path));
+
+            String line = br.readLine();
+
+            String[] data = line.split(",");
+
+            telefonoDoctor = data[6];
+
+
         } catch (Exception e){
 
             suggestLogin();
