@@ -12,36 +12,22 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AdapterView;
-
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import butterknife.ButterKnife;
 import co.edu.uniandes.baymaxpi.baymaxpi.Models.Paciente;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String TAG = MainActivity.class.getSimpleName();
+    private Paciente paciente = new Paciente();
     public final static String PACIENTE = "Paciente";
 
-    private Paciente paciente = new Paciente();
-
     private String telefonoDoctor;
-
-
-    private View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ButterKnife.inject(this);
-
-        ParseUser currentUser = ParseUser.getCurrentUser();
 
         try{
 
@@ -140,54 +124,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
-    private void actualizarPaciente() {
-        ParseQuery<ParseObject> pacienteQuery = ParseQuery.getQuery("Paciente");
-        pacienteQuery.whereEqualTo("paciente", ParseUser.getCurrentUser());
-        pacienteQuery.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> parseObjects, ParseException e) {
-                for (ParseObject parseObject : parseObjects){
-
-                    Paciente pac = new Paciente();
-                    pac.setmId(parseObject.getObjectId());
-                    pac.setNombre(parseObject.get("nombre").toString());
-                    pac.setFechaNacimiento(parseObject.get("fecha").toString());
-                    pac.setDireccion(parseObject.get("direccion").toString());
-                    ArrayList<ArrayList<String>> medsList = (ArrayList)parseObject.get("medicamentos");
-                    if (medsList.get(0).get(0).isEmpty())
-                        medsList.get(0).remove(0);
-                    String[] meds = new String[medsList.get(0).size()];
-                    meds = medsList.get(0).toArray(meds);
-                    pac.setMedicamentos(meds);
-
-                    pac.setEmail(parseObject.get("correo").toString());
-                    pac.setGenero(parseObject.get("genero").toString());
-                    pac.setCedula(parseObject.get("cedula").toString());
-                    pac.setEps(parseObject.get("eps").toString());
-
-                    ArrayList<ArrayList<String>> alimentosList = (ArrayList)parseObject.get("alimentos");
-                    if (alimentosList.get(0).get(0).isEmpty())
-                        alimentosList.get(0).remove(0);
-                    String[] alimentos = new String[alimentosList.get(0).size()];
-                    alimentos = alimentosList.get(0).toArray(alimentos);
-                    pac.setAlimentosYBebidas(alimentos);
-
-                    ArrayList<ArrayList<String>> actFisList = (ArrayList)parseObject.get("actividadFisica");
-                    if (actFisList.get(0).get(0).isEmpty())
-                        actFisList.get(0).remove(0);
-                    String[] actFis = new String[actFisList.get(0).size()];
-                    actFis = actFisList.get(0).toArray(alimentos);
-                    pac.setActividadFisica(actFis);
-
-                    paciente = pac;
-                }
-
-            }
-        });
-
-    }
-
     private void suggestLogin() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setPositiveButton("No se encuentra registrado, se sugiere completar su registro", null);
@@ -228,7 +164,4 @@ public class MainActivity extends AppCompatActivity {
         Intent estadisticasIntent = new Intent(MainActivity.this, EstadisticasActivity.class);
         MainActivity.this.startActivity(estadisticasIntent);
     }
-
-
-
 }
