@@ -3,6 +3,7 @@ angular.module('starter')
     .controller('AppCtrl', function() {})
     .controller('LoginCtrl', function() {})
     .controller('DashCtrl', function() {})
+    .controller('RegCtrl', function() {})
 
     .controller('AppCtrl', function($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
         $scope.username = AuthService.username();
@@ -67,8 +68,16 @@ angular.module('starter')
     };
   })
 
+    .controller('RegCtrl', function($scope, $state, $ionicPopup, AuthService) {
+        $scope.data = {};
 
-.controller('DashCtrl', function($scope, $state, $http, $ionicPopup, AuthService) {
+        $scope.registro = function(data) {
+            $state.go('/registro', {}, {reload:true});
+        };
+    })
+
+
+    .controller('DashCtrl', function($scope, $state, $http, $ionicPopup, AuthService) {
     $scope.logout = function() {
         AuthService.logout();
         $state.go('login');

@@ -81,7 +81,6 @@ angular.module('starter')
       role: function() {return role;}
     };
   })
-
   .factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
     return {
       responseError: function (response) {

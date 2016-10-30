@@ -5,6 +5,11 @@ baymaxPiApp.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
       templateUrl: 'templates/login.html',
       controller: 'LoginCtrl'
     })
+      .state('registro', {
+        url: '/registro',
+        templateUrl: 'templates/registro.html',
+        controller: 'RegCtrl'
+      })
     .state('main', {
       url: '/',
       abstract: true,
