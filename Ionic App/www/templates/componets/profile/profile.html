@@ -1,0 +1,33 @@
+<ion-view view-title="profile" name="profile-view">
+    <ion-nav-buttons side="right">
+        <button class="button icon-left ion-log-out button-stable" ng-click="logout()">Logout</button>
+    </ion-nav-buttons>
+
+    <ion-content class="padding">
+        <div class="row"><div class="col text-center">
+            <h3 class="title">{{username}}, Este es tu Perfil.</h3>
+            <br><br><br>
+            <h2 class="text-left">
+                Nombre: {{username}}
+            </h2>
+            <h2 class="text-left">
+                Cédula: {{cedula}}
+            </h2>
+            <h2 class="text-left">
+                Edad: {{edad}}
+            </h2>
+            <h2 class="text-left">
+                Correo: {{correo}}
+            </h2>
+            <h2 class="text-left">
+                Teléfono: {{celular}}
+            </h2>
+            <h2 class="text-left">
+                EPS: {{eps}}
+            </button>
+            </h2>
+            <br><br>
+            {{response}}
+        </div></div>
+    </ion-content>
+</ion-view>

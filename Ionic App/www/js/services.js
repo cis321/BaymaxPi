@@ -112,7 +112,8 @@ angular.module('starter')
       correo: function () {return correo},
         edad: function () {return edad},
         eps: function () {return eps},
-        cedula: function () {return cedula}
+        cedula: function () {return cedula},
+        telefono:function () {return telefono}
     }
   })
 

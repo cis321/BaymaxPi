@@ -8,14 +8,14 @@
       <h3 class="title">Bienvenido {{username}}!</h3>
       Este es tu inicio de BaymaxPi.
       <br><br><br>
-      <button class="button button-full button-positive" ng-click="performValidRequest()">
-        Make Valid Request
+      <button class="button button-full button-positive" ng-click="goProfile()">
+        Revisa tu perfil!
       </button>
-      <button class="button button-full button-energized" ng-click="performUnauthorizedRequest()">
-        Make Request for unauthorized resource
+      <button class="button button-full button-energized" ng-click="goStatistics()">
+        Mira tus estadísticas!
       </button>
       <button class="button button-full button-assertive" ng-click="performInvalidRequest()">
-        Make Request without valid token
+        Revisa la información de tus médicos!
       </button>
       <br><br>
       {{response}}
