@@ -3,95 +3,108 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'chart.js'])
+angular.module('starter', ['ionic', 'ngMockE2E'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if (window.cordova && window.cordova.plugins.Keyboard) {
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+      // for form inputs)
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+
+      // Don't remove this line unless you know what you are doing. It stops the viewport
+      // from snapping when text inputs are focused. Ionic handles this internally for
+      // a much nicer keyboard experience.
+      cordova.plugins.Keyboard.disableScroll(true);
     }
-    if (window.StatusBar) {
+    if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+    angular.module('starter', ['ionic', 'ngMockE2E']);
   });
 })
 
-.controller('AppCtrl', function($scope, $http, $timeout) {
+  .config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
+    $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'templates/login.html',
+        controller: 'LoginCtrl'
+      })
+      .state('main', {
+        url: '/',
+        abstract: true,
+        templateUrl: 'templates/main.html'
+      })
+      .state('main.dash', {
+        url: 'main/dash',
+        views: {
+          'dash-tab': {
+            templateUrl: 'templates/dashboard.html',
+            controller: 'DashCtrl'
+          }
+        }
+      })
+      .state('main.paciente', {
+        url: 'main/paciente',
+        views: {
+          'paciente-tab': {
+            templateUrl: 'templates/paciente.html'
+          }
+        }
+      })
+      .state('main.admin', {
+        url: 'main/admin',
+        views: {
+          'admin-tab': {
+            templateUrl: 'templates/admin.html'
+          }
+        },
+        data: {
+          authorizedRoles: [USER_ROLES.admin]
+        }
+      });
 
-  $scope.data;
-  $scope.labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
-  $scope.series = ['Temperatura', 'Presion', 'Glucosa'];
+    // Thanks to Ben Noblet!
+    $urlRouterProvider.otherwise(function ($injector, $location) {
+      var $state = $injector.get("$state");
+      $state.go("main.dash");
+    });
+  })
 
-  $scope.doRefresh = function() {
-    
-    console.log('Refreshing!');
-    $timeout( function() {
-      //simulate async response
-          var array;
-    var alertArray;
-    //Limpio arreglo chambonisimamente
-    $scope.data = [
-      [],
-      [],
-      []
-    ];
-    //Contenedor de eventos importantes (por eje, temp > 37.5)
-    var URL_Alertas = 'http://172.20.10.14:4000/m2m/applications/Central/containers/alarmContainer/contentInstances/';
-    //Contenedor de todas las medidas que el sensor envía
-    var URL_Todo = 'http://172.20.10.14:4000/m2m/applications/TempSensor1/containers/tempContainer/contentInstances/';
-    /**
-     * Metodo para recibir todos los valores en los contenedores y graficar los ultimos 10.
-     */
-    $http({
-      method: 'GET',
-      url: URL_Todo
-    }).then(function successCallback(response) {
-      console.log('Llamado HTTP exitoso');
-      array = response.data.contentInstances.contentInstanceCollection.contentInstance;
-      //Cualquier valor para probar
-      //$scope.response = atob(response.data.contentInstances.contentInstanceCollection.contentInstance[2].content.binaryContent);
-      //Solo 10 de los valores para q no muera tan rapido
-      array = array.slice(Math.max(array.length - 10, 0));
-      for (var i = 0; i < array.length; i++) {
-        dataContent = JSON.parse(atob(array[i].content.binaryContent));
-        $scope.data[0].push(dataContent.temperature);
-        $scope.data[1].push(dataContent.presion);
-        $scope.data[2].push(dataContent.glucose);
+.run(function($httpBackend){
+  $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+})
+
+  .run(function($httpBackend){
+    $httpBackend.whenGET('http://localhost:8100/valid')
+      .respond({message: 'This is my valid response!'});
+    $httpBackend.whenGET('http://localhost:8100/notauthenticated')
+      .respond(401, {message: "Not Authenticated"});
+    $httpBackend.whenGET('http://localhost:8100/notauthorized')
+      .respond(403, {message: "Not Authorized"});
+
+    $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+  })
+
+  .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+    $rootScope.$on('$stateChangeStart', function (event,next, nextParams, fromState) {
+
+      if ('data' in next && 'authorizedRoles' in next.data) {
+        var authorizedRoles = next.data.authorizedRoles;
+        if (!AuthService.isAuthorized(authorizedRoles)) {
+          event.preventDefault();
+          $state.go($state.current, {}, {reload: true});
+          $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+        }
       }
 
-    }, function errorCallback(response) {
-      console.log('Error al hacer el llamado HTTP');
-      //$scope.response = 'Error al hacer el llamado HTTP';
-    });
-
-    /**
-     * Metodo para recibir todos los valores que son categorizados como una alerta.
-     */
-    $http({
-      method: 'GET',
-      url: URL_Alertas
-    }).then(function successCallback(response) {
-      console.log('Llamado HTTP exitoso');
-      alertArray = response.data.contentInstances.contentInstanceCollection.contentInstance;
-      //Último valor
-      alertArray = alertArray.slice(Math.max(alertArray.length - 1, 0));
-      for (var i = 0; i < alertArray.length; i++) {
-        dataContent1 = JSON.parse(atob(alertArray[i].content.binaryContent));
-        $scope.response ='Problema con su ' + dataContent1.problem + ' con un valor de ' + dataContent1.value;
+      if (!AuthService.isAuthenticated()) {
+        if (next.name !== 'login') {
+          event.preventDefault();
+          $state.go('login');
+        }
       }
-
-    }, function errorCallback(response) {
-      console.log('Error al hacer el llamado HTTP');
-      //$scope.response = 'Error al hacer el llamado HTTP';
     });
-
-      //Stop the ion-refresher from spinning
-      $scope.$broadcast('scroll.refreshComplete');
-    
-    }, 1000);
-      
-    };
-
-});
+  })
+;
