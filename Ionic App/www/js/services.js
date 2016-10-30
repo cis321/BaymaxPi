@@ -9,6 +9,13 @@ angular.module('starter')
     var isAuthenticated = false;
     var role = '';
     var authToken;
+      var edad = '';
+      var cedula = '';
+      var telefono = '';
+      var registrado = false;
+      var correo = '';
+      var password = '';
+      var eps = '';
 
     function loadUserCredentials() {
       var token = window.localStorage.getItem(LOCAL_TOKEN_KEY);
@@ -59,6 +66,28 @@ angular.module('starter')
       });
     };
 
+    var registro = function(name, pw, ed, cor, ep, tel, ced)
+    {
+        return $q(function(resolve, reject)
+        {
+            // Hay que cambiarlo para que compare las credenciales bien
+         if ((name == 'admin' && pw == '1') || (name == 'user' && pw == '1')) {
+             // Make a request and receive your auth token from your server
+             storeUserCredentials(name + '.yourServerToken');
+             edad = ed;
+             correo = cor;
+             eps = ep;
+             telefono = tel;
+             cedula = ced;
+             password = pw;
+             registrado = true;
+             resolve('Login success.');
+         } else {
+             reject('Login Failed.');
+         }
+        });
+    };
+
     var logout = function() {
       destroyUserCredentials();
     };
@@ -78,9 +107,15 @@ angular.module('starter')
       isAuthorized: isAuthorized,
       isAuthenticated: function() {return isAuthenticated;},
       username: function() {return username;},
-      role: function() {return role;}
-    };
+      role: function() {return role;},
+      registro: registro,
+      correo: function () {return correo},
+        edad: function () {return edad},
+        eps: function () {return eps},
+        cedula: function () {return cedula}
+    }
   })
+
   .factory('AuthInterceptor', function ($rootScope, $q, AUTH_EVENTS) {
     return {
       responseError: function (response) {
