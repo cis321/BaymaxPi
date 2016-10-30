@@ -1,30 +1,25 @@
 angular.module('starter')
 
-    .controller('AppCtrl', function() {})
-    .controller('LoginCtrl', function() {})
-    .controller('DashCtrl', function() {})
-    .controller('RegCtrl', function() {})
-
-    .controller('AppCtrl', function($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
+    .controller('AppCtrl', function ($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
         $scope.username = AuthService.username();
 
-        $scope.$on(AUTH_EVENTS.notAuthorized, function(event) {
+        $scope.$on(AUTH_EVENTS.notAuthorized, function (event) {
             var alertPopup = $ionicPopup.alert({
                 title: 'Unauthorized!',
-                template: 'You are not allowed to access this resource.'
+                template: 'You are not allowed to access this resource.',
             });
         });
 
-        $scope.$on(AUTH_EVENTS.notAuthenticated, function(event) {
+        $scope.$on(AUTH_EVENTS.notAuthenticated, function (event) {
             AuthService.logout();
             $state.go('login');
             var alertPopup = $ionicPopup.alert({
                 title: 'Session Lost!',
-                template: 'Sorry, You have to login again.'
+                template: 'Sorry, You have to login again.',
             });
         });
 
-        $scope.setCurrentUsername = function(name) {
+        $scope.setCurrentUsername = function (name) {
             $scope.username = name;
         };
     })
@@ -83,30 +78,28 @@ angular.module('starter')
         $state.go('login');
     };
 
-    $scope.performValidRequest = function() {
+    $scope.performValidRequest = function () {
         $http.get('http://localhost:8100/valid').then(
-            function(result) {
+            function (result) {
                 $scope.response = result;
             });
     };
 
-    $scope.performUnauthorizedRequest = function() {
+    $scope.performUnauthorizedRequest = function () {
         $http.get('http://localhost:8100/notauthorized').then(
-            function(result) {
+            function (result) {
                 // No result here..
-            }, function(err) {
+            }, function (err) {
                 $scope.response = err;
             });
     };
 
-    $scope.performInvalidRequest = function() {
+    $scope.performInvalidRequest = function () {
         $http.get('http://localhost:8100/notauthenticated').then(
-            function(result) {
+            function (result) {
                 // No result here..
-            }, function(err) {
+            }, function (err) {
                 $scope.response = err;
             });
     };
 });
-
-    
