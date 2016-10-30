@@ -2,7 +2,6 @@
 baymaxPiApp.controller('RegCtrl', function ($scope, $state, $ionicPopup, AuthService) {
     $scope.data = {};
 
-console.log('reg');
     // $scope.register = function (data) {
     //     AuthService.login(data.username, data.password).then(function (authenticated) {
     //         $state.go('main.dash', {}, {
