@@ -9,6 +9,6 @@ baymaxPiApp.controller('DashCtrl', function ($scope, $state) {
     };
 
     $scope.goStatistics = function () {
-        $state.go('profile');
+        $state.go('statistics');
     };
 })
