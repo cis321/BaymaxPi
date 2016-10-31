@@ -35,13 +35,12 @@ baymaxPiApp.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
         })
         .state('profile', {
             url: '/profile',
-            templateUrl: 'templates/componets/profile/profile.html'
-
+            templateUrl: 'templates/componets/profile/profile.html',
         })
 
         .state('statistics', {
             url: '/statistics',
-            templateUrl: 'templates/componets/statistics/statistics.html'
+            templateUrl: 'templates/componets/statistics/statistics.html',
         })
 
         .state('main.admin', {
