@@ -1,5 +1,5 @@
 /* globals baymaxPiApp */
-baymaxPiApp.controller('RegCtrl', function ($scope, $state, $ionicPopup, AuthService) {
+baymaxPiApp.controller('RegCtrl', function ($scope, $state, AuthService) {
     $scope.data = {};
 
     // $scope.register = function (data) {
