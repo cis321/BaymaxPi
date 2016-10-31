@@ -17,10 +17,12 @@ import com.mongodb.MongoCredential;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoDatabase;
 
-import co.uniandes.serverBaymaxPi.api.resources.MedicalDataResource;
+import co.uniandes.serverBaymaxPi.api.resources.AuthorizationResource;
+import co.uniandes.serverBaymaxPi.domain.business.AuthorizationBusiness;
 import co.uniandes.serverBaymaxPi.domain.business.MedicalDataBusiness;
 import co.uniandes.serverBaymaxPi.infrasctructure.config.ContentManagerConfig;
 import co.uniandes.serverBaymaxPi.infrasctructure.config.MongoDBConfig;
+import co.uniandes.serverBaymaxPi.persistence.db.datamappers.AuthorizationDataMapper;
 import co.uniandes.serverBaymaxPi.persistence.db.datamappers.MedicalDataDataMapper;
 import io.dropwizard.Application;
 import io.dropwizard.java8.Java8Bundle;
@@ -77,9 +79,14 @@ public class ServerBaymaxPi extends Application<ContentManagerConfig> {
         configureJacksonObjectMapper(environment);
         ObjectMapper objectMapper = environment.getObjectMapper();
         MedicalDataDataMapper contentDataMapper = new MedicalDataDataMapper(objectMapper);
-        MedicalDataBusiness contentBusiness = new MedicalDataBusiness(contentDataMapper, mongoDatabase);    
+        MedicalDataBusiness contentBusiness = new MedicalDataBusiness(contentDataMapper, mongoDatabase);
         
-        environment.jersey().register(new MedicalDataResource(contentBusiness));
+        AuthorizationDataMapper authorizationDataMapper = new AuthorizationDataMapper(objectMapper);
+        AuthorizationBusiness authorizationBusiness = new AuthorizationBusiness(authorizationDataMapper, mongoDatabase);
+        AuthorizationResource authorizationResource = new AuthorizationResource(authorizationBusiness);
+        
+        environment.jersey().register(contentBusiness);
+        environment.jersey().register(authorizationResource);
     }
 
     ///////////////////////////////////

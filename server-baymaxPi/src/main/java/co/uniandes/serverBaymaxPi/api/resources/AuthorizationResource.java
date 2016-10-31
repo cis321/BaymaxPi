@@ -24,8 +24,8 @@ public class AuthorizationResource {
     }
 
     @POST
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
     public Response createUser(UserDTO userDTO) {
 
         Either<IException, Boolean> either = authorizationBusiness.createUser(userDTO);

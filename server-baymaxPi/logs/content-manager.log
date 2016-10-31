@@ -88,3 +88,45 @@ INFO  [2016-10-30 23:05:25,901] org.eclipse.jetty.server.ServerConnector: Starte
 INFO  [2016-10-30 23:05:32,889] org.eclipse.jetty.server.ServerConnector: Stopped ServerBaymaxPi@24faea88{HTTP/1.1}{0.0.0.0:9050}
 INFO  [2016-10-30 23:05:32,889] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@2516fc68{/server-baymaxpi/admin,null,UNAVAILABLE}
 INFO  [2016-10-30 23:05:32,890] org.eclipse.jetty.server.handler.ContextHandler: Stopped i.d.j.MutableServletContextHandler@70d8de{/server-baymaxpi/api,null,UNAVAILABLE}
+INFO  [2016-10-31 02:42:04,770] org.mongodb.driver.cluster: Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+INFO  [2016-10-31 02:42:04,772] org.mongodb.driver.cluster: Adding discovered server localhost:27017 to client view of cluster
+INFO  [2016-10-31 02:42:04,799] io.dropwizard.server.ServerFactory: Starting ServerBaymaxPi
+INFO  [2016-10-31 02:42:04,825] org.mongodb.driver.cluster: Exception in monitor thread while connecting to server localhost:27017
+! com.mongodb.MongoCommandException: Command failed with error 18: 'Authentication failed.' on server localhost:27017. The full response is { "ok" : 0.0, "code" : 18, "errmsg" : "Authentication failed." }
+! at com.mongodb.connection.CommandHelper.createCommandFailureException(CommandHelper.java:170) ~[mongo-java-driver-3.2.2.jar:na]
+! at com.mongodb.connection.CommandHelper.receiveCommandResult(CommandHelper.java:123) ~[mongo-java-driver-3.2.2.jar:na]
+! at com.mongodb.connection.CommandHelper.executeCommand(CommandHelper.java:32) ~[mongo-java-driver-3.2.2.jar:na]
+! at com.mongodb.connection.SaslAuthenticator.sendSaslStart(SaslAuthenticator.java:95) ~[mongo-java-driver-3.2.2.jar:na]
+! at com.mongodb.connection.SaslAuthenticator.authenticate(SaslAuthenticator.java:45) ~[mongo-java-driver-3.2.2.jar:na]
+! ... 6 common frames omitted
+! Causing: com.mongodb.MongoSecurityException: Exception authenticating MongoCredential{mechanism=null, userName='baymaxPi', source='baymaxPi', password=<hidden>, mechanismProperties={}}
+! at com.mongodb.connection.SaslAuthenticator.authenticate(SaslAuthenticator.java:61) ~[mongo-java-driver-3.2.2.jar:na]
+! at com.mongodb.connection.DefaultAuthenticator.authenticate(DefaultAuthenticator.java:32) ~[mongo-java-driver-3.2.2.jar:na]
+! at com.mongodb.connection.InternalStreamConnectionInitializer.authenticateAll(InternalStreamConnectionInitializer.java:99) ~[mongo-java-driver-3.2.2.jar:na]
+! at com.mongodb.connection.InternalStreamConnectionInitializer.initialize(InternalStreamConnectionInitializer.java:44) ~[mongo-java-driver-3.2.2.jar:na]
+! at com.mongodb.connection.InternalStreamConnection.open(InternalStreamConnection.java:115) ~[mongo-java-driver-3.2.2.jar:na]
+! at com.mongodb.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:128) ~[mongo-java-driver-3.2.2.jar:na]
+! at java.lang.Thread.run(Thread.java:745) [na:1.8.0_66]
+INFO  [2016-10-31 02:42:04,842] org.eclipse.jetty.setuid.SetUIDListener: Opened ServerBaymaxPi@3a320ade{HTTP/1.1}{0.0.0.0:9050}
+INFO  [2016-10-31 02:42:04,843] org.eclipse.jetty.server.Server: jetty-9.0.7.v20131107
+INFO  [2016-10-31 02:42:04,958] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.18.1 02/19/2014 03:28 AM'
+INFO  [2016-10-31 02:42:05,014] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    POST    /authorization (co.uniandes.serverBaymaxPi.api.resources.AuthorizationResource)
+
+INFO  [2016-10-31 02:42:05,149] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@5aa6202e{/server-baymaxpi/api,null,AVAILABLE}
+INFO  [2016-10-31 02:42:05,152] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+WARN  [2016-10-31 02:42:05,152] io.dropwizard.setup.AdminEnvironment: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS APPLICATION HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW      !
+!     IF IT DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE      !
+!    LETTING YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH OF YOUR    !
+!         APPLICATION'S DEPENDENCIES WHICH FULLY (BUT LIGHTLY) TESTS IT.       !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2016-10-31 02:42:05,156] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@7f34a967{/server-baymaxpi/admin,null,AVAILABLE}
+INFO  [2016-10-31 02:42:05,159] org.eclipse.jetty.server.ServerConnector: Started ServerBaymaxPi@3a320ade{HTTP/1.1}{0.0.0.0:9050}
