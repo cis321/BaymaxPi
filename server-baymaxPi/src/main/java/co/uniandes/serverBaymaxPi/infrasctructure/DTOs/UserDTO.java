@@ -1,5 +1,8 @@
 package co.uniandes.serverBaymaxPi.infrasctructure.DTOs;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class UserDTO {
     
     private final String username;
@@ -16,7 +19,9 @@ public class UserDTO {
     
     private final String contrasena;
     
-    public UserDTO(String username, String cedula, int edad, String email, String eps, String celular, String contrasena){
+    @JsonCreator
+    public UserDTO(@JsonProperty("username")String username, @JsonProperty("cedula")String cedula, @JsonProperty("edad")int edad, 
+            @JsonProperty("email")String email, @JsonProperty("eps")String eps, @JsonProperty("celular")String celular, @JsonProperty("contrasena")String contrasena){
         
         this.username = username;
         this.cedula = cedula;

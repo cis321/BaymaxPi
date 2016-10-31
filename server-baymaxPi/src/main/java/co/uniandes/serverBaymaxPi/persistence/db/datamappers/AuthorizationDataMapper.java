@@ -16,7 +16,7 @@ import fj.data.Either;
 
 public class AuthorizationDataMapper {
     
-    private static final String USERS_COLLECTION = "users";
+    private static final String USERS_COLLECTION = "users_baymaxPi";
     
     private final ObjectMapper objectMapper;
     

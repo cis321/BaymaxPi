@@ -28,8 +28,8 @@ logging:
       
 mongoDBConfig:
 
-  dbName: baymaxPi
-  dbUser: baymaxPi
-  dbPassword: baymaxPiPsw
+  dbName: SWD_DB	
+  dbUser: swd_db
+  dbPassword: swd_db
   dbAddresses: 
     - localhost

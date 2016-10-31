@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 
 /* globals window, cordova, StatusBar, angular */
-var baymaxPiApp = angular.module('starter', ['ionic', 'ngMockE2E', 'ngResource', ])
+var baymaxPiApp = angular.module('starter', ['ionic', 'ngResource', ])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -24,13 +24,13 @@ var baymaxPiApp = angular.module('starter', ['ionic', 'ngMockE2E', 'ngResource',
             StatusBar.styleDefault();
         }
 
-        angular.module('starter', ['ionic', 'ngMockE2E', 'ngResource', ]);
+        angular.module('starter', ['ionic', 'ngResource', ]);
     });
 })
 
-.run(function ($httpBackend) {
-    $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
-})
+// .run(function ($httpBackend) {
+//     $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+// })
 
 .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
     $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {

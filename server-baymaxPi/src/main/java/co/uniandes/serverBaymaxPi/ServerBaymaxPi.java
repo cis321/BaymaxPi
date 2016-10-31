@@ -113,7 +113,7 @@ public class ServerBaymaxPi extends Application<ContentManagerConfig> {
         filter.setInitParameter(CrossOriginFilter.ACCESS_CONTROL_ALLOW_ORIGIN_HEADER, "*");
         filter.setInitParameter(CrossOriginFilter.ALLOWED_METHODS_PARAM, "OPTIONS,HEAD,GET,POST,PUT,DELETE,PATCH");
         filter.setInitParameter(CrossOriginFilter.ALLOWED_HEADERS_PARAM,
-                "X-Requested-With,Content-Type,Content-Length,Accept,Origin,Authorization");
+                "X-Requested-With,Content-Type,Content-Length,Accept,Origin,Authorization, Access-Control-Allow-Origin");
         filter.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
     }
 

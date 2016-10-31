@@ -1,18 +1,16 @@
 /* globals baymaxPiApp */
-baymaxPiApp.controller('RegCtrl', function ($scope, $state, AuthService) {
+baymaxPiApp.controller('RegCtrl', function ($scope, $state, LoginService) {
     $scope.data = {};
 
-    // $scope.register = function (data) {
-    //     AuthService.login(data.username, data.password).then(function (authenticated) {
-    //         $state.go('main.dash', {}, {
-    //             reload: true,
-    //         });
-    //         $scope.setCurrentUsername(data.username);
-    //     }, function () {
-    //         $ionicPopup.alert({
-    //             title: 'Login failed!',
-    //             template: 'Please check your credentials!',
-    //         });
-    //     });
-    // };
+    $scope.createUser = function () {
+      LoginService.createUser({}, $scope.data, createUserSuccess, createUserError);
+    }
+
+    function createUserSuccess () {
+      console.log(':)');
+    }
+
+    function createUserError (response) {
+      console.log('error' + response);
+    }
 })
