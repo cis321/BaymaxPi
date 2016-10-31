@@ -14,8 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import co.uniandes.serverBaymaxPi.domain.business.MedicalDataBusiness;
 import co.uniandes.serverBaymaxPi.domain.entities.SensorBeat;
-import co.uniandes.serverBaymaxPi.infrasctructure.exceptions.BusinessException;
-import co.uniandes.serverBaymaxPi.infrasctructure.exceptions.ExceptionCodes;
 import co.uniandes.serverBaymaxPi.infrasctructure.exceptions.IException;
 import fj.data.Either;
 
@@ -37,7 +35,6 @@ public class MedicalDataResource {
     public Response createTemporalFile(List<SensorBeat> sensorBeatList) {
 
         Response response;
-        try {
 
             Either<IException, String> either = medicalDataBusiness.ok();
 
@@ -51,16 +48,6 @@ public class MedicalDataResource {
                 response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(exception).build();
 
             }
-
-        } catch (IllegalArgumentException e) {
-
-            LOGGER.error("ContentResource :: createTemporalFile", e);
-            BusinessException businessException = new BusinessException(
-                    ExceptionCodes.DM_CREATE_TEMPORAL_INVALID_FILE_TYPE_EXCEPTION, null);
-            response = Response.status(ExceptionCodes.getStatusCode(businessException)).entity(businessException)
-                    .build();
-
-        }
 
         return response;
 

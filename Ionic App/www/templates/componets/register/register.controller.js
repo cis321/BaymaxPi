@@ -1,5 +1,5 @@
 /* globals baymaxPiApp */
-baymaxPiApp.controller('RegCtrl', function ($scope, $state, LoginService) {
+baymaxPiApp.controller('RegCtrl', function ($scope, $state, LoginService, $ionicPopup) {
     $scope.data = {};
 
     $scope.createUser = function () {
@@ -7,10 +7,17 @@ baymaxPiApp.controller('RegCtrl', function ($scope, $state, LoginService) {
     }
 
     function createUserSuccess () {
-      console.log(':)');
+      $ionicPopup.alert({
+        title: 'User creation succes!',
+        template: 'Now you can login',
+      });
+      $state.go('login');
     }
 
     function createUserError (response) {
-      console.log('error' + response);
+      $ionicPopup.alert({
+        title: 'User creation faild!',
+        template: 'Try later!',
+      });
     }
 })

@@ -11,6 +11,10 @@ baymaxPiApp.factory('LoginService', ['$resource',
                 method: 'POST',
                 isArray: false,
             },
+            login: {
+              method: 'GET',
+              isArray: false,
+            },
         };
 
         return $resource(url, defaultParams, actions);
