@@ -1,0 +1,32 @@
+<ion-view view-title="Médico" name="dashboard-view">
+  <ion-pane>
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">eHealth</h1>
+    </ion-header-bar>
+
+    <ion-content padding="true">
+      <ion-refresher on-refresh="doRefresh()">
+      </ion-refresher>
+      <div class="card">
+        <div class="item item-text-wrap">
+          Últimos Pacientes Registrados: <b ng-bind="response"></b>
+        </div>
+
+        <div class="button  button-full button-positive">
+          Ver sus estadísticas: <b ng-bind="response"></b>
+        </div>
+
+      </div>
+      <!-- Graph -->
+      <div class="card">
+        <div class="item item-divider">
+          Datos sesión (Últimas 10 lecturas)
+        </div>
+        <div class="item item-text-wrap">
+          <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" options="{showTooltips: false}"></canvas>
+        </div>
+      </div>
+      <!-- end graph -->
+    </ion-content>
+  </ion-pane>
+</ion-view>
