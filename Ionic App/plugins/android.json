@@ -12,6 +12,9 @@
         },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.pruebaconexion177135"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.ionicframework.pruebaconexion177135"
         }
     },
     "dependent_plugins": {
