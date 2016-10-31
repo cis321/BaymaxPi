@@ -41,6 +41,7 @@ baymaxPiApp.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
         .state('statistics', {
             url: '/statistics',
             templateUrl: 'templates/componets/statistics/statistics.html',
+            controller: 'StadisticsCtrl',
         })
 
         .state('main.admin', {
