@@ -2,9 +2,9 @@
   "name": "pruebaConexion",
   "app_id": "",
   "proxies": [
-  {
-    "path": "/server-baymaxpi",
-    "proxyUrl": "http://192.168.0.31:9050/server-baymaxpi"
-  }
-]
+    {
+      "path": "/server-baymaxpi",
+      "proxyUrl": "http://localhost:9050/server-baymaxpi"
+    }
+  ]
 }
