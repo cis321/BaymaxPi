@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 
 /* globals window, cordova, StatusBar, angular */
-var baymaxPiApp = angular.module('starter', ['ionic', 'ngMockE2E', ])
+var baymaxPiApp = angular.module('starter', ['ionic', 'ngMockE2E', 'ngResource', ])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -24,10 +24,32 @@ var baymaxPiApp = angular.module('starter', ['ionic', 'ngMockE2E', ])
             StatusBar.styleDefault();
         }
 
-        angular.module('starter', ['ionic', 'ngMockE2E', ]);
+        angular.module('starter', ['ionic', 'ngMockE2E', 'ngResource', ]);
     });
 })
 
 .run(function ($httpBackend) {
     $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
 })
+
+.run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
+    $rootScope.$on('$stateChangeStart', function (event, next, nextParams, fromState) {
+        if ('data' in next && 'authorizedRoles' in next.data) {
+            var authorizedRoles = next.data.authorizedRoles;
+            if (!AuthService.isAuthorized(authorizedRoles)) {
+                event.preventDefault();
+                $state.go($state.current, {}, {
+                    reload: true,
+                });
+                $rootScope.$broadcast(AUTH_EVENTS.notAuthorized);
+            }
+        }
+
+        if (!AuthService.isAuthenticated()) {
+            if (next.name !== 'login') {
+                event.preventDefault();
+                $state.go('login');
+            }
+        }
+    });
+});

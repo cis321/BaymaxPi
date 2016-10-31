@@ -28,7 +28,7 @@ public class AuthorizationResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(UserDTO userDTO) {
 
-        Either<IException, String> either = authorizationBusiness.createUser(userDTO);
+        Either<IException, Boolean> either = authorizationBusiness.createUser(userDTO);
 
         if (either.isRight()) {
 
