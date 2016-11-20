@@ -36,25 +36,24 @@ baymaxPiApp.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
         .state('profile', {
             url: '/profile',
             templateUrl: 'templates/componets/profile/profile.html',
+            controller: 'ProfileController',
         })
 
-        .state('statistics', {
-            url: '/statistics',
-            templateUrl: 'templates/componets/statistics/statistics.html',
-            controller: 'StadisticsCtrl',
-        })
+    .state('statistics', {
+        url: '/statistics',
+        templateUrl: 'templates/componets/statistics/statistics.html',
+        controller: 'StadisticsCtrl',
+    })
 
-        .state('main.admin', {
-            url: 'main/admin',
-            views: {
-                'admin-tab': {
-                    templateUrl: 'templates/admin.html',
-                },
+    .state('main.admin', {
+        url: 'main/admin',
+        views: {
+            'admin-tab': {
+                templateUrl: 'templates/componets/admin/admin.html',
+                controller: 'AdminController',
             },
-            data: {
-                authorizedRoles: [USER_ROLES.admin, ],
-            },
-        });
+        },
+    });
 
     // Thanks to Ben Noblet!
     $urlRouterProvider.otherwise(function ($injector, $location) {

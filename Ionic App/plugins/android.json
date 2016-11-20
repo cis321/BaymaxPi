@@ -7,13 +7,13 @@
         "files": {}
     },
     "installed_plugins": {
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.ionicframework.pruebaconexion177135"
+        },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.ionicframework.pruebaconexion177135"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.pruebaconexion177135"
-        },
-        "cordova-plugin-dialogs": {
             "PACKAGE_NAME": "com.ionicframework.pruebaconexion177135"
         }
     },

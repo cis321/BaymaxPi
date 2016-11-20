@@ -4,7 +4,11 @@
   "proxies": [
     {
       "path": "/server-baymaxpi",
-      "proxyUrl": "http://localhost:9050/server-baymaxpi"
+      "proxyUrl": "http://localhost:8100/server-baymaxpi"
+    },
+    {
+      "path": "/m2m",
+      "proxyUrl": "http://192.168.43.241:4000/m2m"
     }
   ]
 }

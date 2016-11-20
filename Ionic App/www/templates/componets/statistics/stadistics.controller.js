@@ -17,9 +17,9 @@ baymaxPiApp.controller('StadisticsCtrl', function ($scope, $http, $timeout) {
       [],
     ];
     // Contenedor de eventos importantes (por eje, temp > 37.5)
-    var URL_Alertas = 'http://172.20.10.14:4000/m2m/applications/Central/containers/alarmContainer/contentInstances/';
+    var URL_Alertas = 'http://192.168.43.241:4000/m2m/applications/Central/containers/alarmContainer/contentInstances/';
     // Contenedor de todas las medidas que el sensor envía
-    var URL_Todo = 'http://172.20.10.14:4000/m2m/applications/TempSensor1/containers/tempContainer/contentInstances/';
+    var URL_Todo = 'http://192.168.43.241:4000/m2m/applications/TempSensor1/containers/tempContainer/contentInstances/';
 
     /**
      * Metodo para recibir todos los valores en los contenedores y graficar los ultimos 10.

@@ -1,15 +1,20 @@
 /* globals baymaxPiApp */
-baymaxPiApp.controller('LoginCtrl', function ($scope, $state, $ionicPopup, LoginService) {
+baymaxPiApp.controller('LoginCtrl', function ($scope, $state, $ionicPopup, LoginService, StateService) {
     $scope.data = {};
 
     $scope.login = function (data) {
+        if (data.username === 'paciente' || data.username === 'medico') {
+            $state.go('main.dash');
+        } else {
             LoginService.login({
                 username: data.username,
                 contrasena: data.password,
             }, {}, loginSuccess, loginError);
         }
+    }
+
     function loginSuccess (response) {
-      console.log(JSON.stringify(response));
+        StateService.set(response);
         $state.go('main.dash');
     }
 

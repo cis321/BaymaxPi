@@ -1,0 +1,35 @@
+server:
+  type: simple
+  applicationContextPath: /server-sensor/api
+  adminContextPath: /server-sensor/admin
+  connector:
+    type: http
+    port: 9051
+    
+
+logging:
+  level: INFO
+  loggers:
+    io.dropwizard: INFO
+  appenders:
+    - type: console
+      threshold: ALL
+      timeZone: UTC
+      target: stdout
+      logFormat: # TODO
+    - type: file
+      currentLogFilename: ./logs/content-manager.log
+      threshold: ALL
+      archive: true
+      archivedLogFilenamePattern: ./logs/content-manager-%d.log
+      archivedFileCount: 50
+      timeZone: UTC
+      logFormat: # TODO
+      
+mongoDBConfig:
+
+  dbName: SWD_DB	
+  dbUser: swd_db
+  dbPassword: swd_db
+  dbAddresses: 
+    - localhost
