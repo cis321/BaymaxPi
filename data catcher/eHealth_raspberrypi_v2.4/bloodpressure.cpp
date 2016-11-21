@@ -33,8 +33,6 @@
 
 //Include eHealth library
 #include "eHealth.h"
-#include <sstream>
-#include <string>
 
 void setup() {
 
@@ -44,77 +42,53 @@ void setup() {
 
 void loop() {
 
-  std::stringstream ss;
-
   uint8_t numberOfData = eHealth.getBloodPressureLength();
-  printf("Number of measures : ");
-  printf("%d\n",numberOfData);
   delay(100);
   if(numberOfData>0){
-    ss<<"[";
+        printf("[");
   }
 
   for (int i = 0; i<numberOfData; i++) {
-    ss<<"{";
     // The protocol sends data in this order
-    printf("==========================================");
-
-    printf("Measure number ");
-    printf("%d\n",i + 1);
-    printf("%d\n",i);
-
-    printf("Date -> ");
+    printf("{\"Day\":");
     printf("%d",eHealth.bloodPressureDataVector[i].day);
-    ss<<"{\"Dia\":"<<eHealth.bloodPressureDataVector[i].day+'0'<<"},";
+    printf(",");
 
-    printf(" of ");
+    printf("\"Month\":");
     printf("%d",eHealth.numberToMonth(eHealth.bloodPressureDataVector[i].month));
-    ss<<"{\"Mes\":"<<eHealth.bloodPressureDataVector[i].month+'0'<<"},";
-    printf(" of ");
+    printf(",");
+
+    printf("\"Year\":");
     printf("%d",2000 + eHealth.bloodPressureDataVector[i].year);
-    ss<<"{\"Año\":"<<2000 + eHealth.bloodPressureDataVector[i].year+'0'<<"},";
-    printf(" at ");
+    printf(",");
 
-    if (eHealth.bloodPressureDataVector[i].hour < 10) {
-      printf("%d",0); // Only for best representation.
-    }
-
+    printf("\"Hours\":");
     printf("%d",eHealth.bloodPressureDataVector[i].hour);
-    ss<<"{\"Hora\":"<<eHealth.bloodPressureDataVector[i].hour+'0'<<"},";
-    printf(":");
+    printf(",");
 
-    if (eHealth.bloodPressureDataVector[i].minutes < 10) {
-      printf("%d",0);// Only for best representation.
-    }
-    printf("%d\n",eHealth.bloodPressureDataVector[i].minutes);
-    ss<<"{\"Minutos\":"<<eHealth.bloodPressureDataVector[i].minutes+'0'<<"},";
+    printf("\"Minutes\":");
+    printf("%d",eHealth.bloodPressureDataVector[i].minutes);
+    printf(",");
 
-    printf("Systolic value : ");
-    printf("%d\n",30+eHealth.bloodPressureDataVector[i].systolic);
-    ss<<"{\"Sistólica\":"<<30+eHealth.bloodPressureDataVector[i].systolic+'0'<<"},";
-    printf(" mmHg\n");
+    printf("\"Systolic\":");
+    printf("%d",30+eHealth.bloodPressureDataVector[i].systolic);
+    printf(",");
 
-    printf("Diastolic value : ");
+    printf("\"Diastolic\":");
     printf("%d",eHealth.bloodPressureDataVector[i].diastolic);
-    ss<<"{\"Diastólica\":"<<eHealth.bloodPressureDataVector[i].diastolic+'0'<<"},";
-    printf(" mmHg\n");
+    printf(",");
 
-    printf("Pulse value : ");
+    printf("\"Pulse\":");
     printf("%d",eHealth.bloodPressureDataVector[i].pulse);
-    ss<<"{\"Pulso\":"<<eHealth.bloodPressureDataVector[i].pulse+'0'<<"}";
-    printf(" bpm\n");
 
     int j = i+1;
 
     if(j==numberOfData){
-      ss<<"}]";
-      std::string s = ss.str();
-      printf(s.c_str());
+      printf("}]");
     } else {
-      ss<<"},";
+      printf("},");
     }
   }
-  // RestClient::Response r = RestClient::post("localhost:4000/m2m/applications/TempSensor1/containers/tempContainer/contentInstances/", "text/json", ss.str().c_str());
 }
 
 int main (){
