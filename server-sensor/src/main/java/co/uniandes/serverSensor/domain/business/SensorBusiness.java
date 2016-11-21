@@ -50,8 +50,5 @@ public class SensorBusiness {
         }
 
         return output.toString();
-
     }
-
-
 }
