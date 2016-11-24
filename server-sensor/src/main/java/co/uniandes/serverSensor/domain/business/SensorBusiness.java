@@ -12,10 +12,6 @@ public class SensorBusiness {
 	public SensorBusiness() {
 	}
 	
-	public Either<IException, String> ok(){
-	    return Either.right("");
-	}
-
     public Either<IException, String> getPresionData() {
         
         String[] command = {"/bin/bash","-c","/home/pi/ardupi/cooking/arduPi/presion"};
