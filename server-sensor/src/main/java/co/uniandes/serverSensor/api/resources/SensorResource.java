@@ -45,4 +45,52 @@ public class SensorResource {
 
         return response;        
     }
+    
+    @GET
+    @Path("/ecg")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEcgData(){
+        
+        Response response;
+
+        Either<IException, String> either = sensorBusiness.getEcg();
+
+        if (either.isRight()) {
+
+            response = Response.status(Response.Status.CREATED).entity(either.right().value()).build();
+
+        } else {
+
+            IException exception = either.left().value();
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(exception).build();
+
+        }
+
+        return response;        
+    }
+    
+    @GET
+    @Path("/emg")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getEmcData(){
+        
+        Response response;
+
+        Either<IException, String> either = sensorBusiness.getEmg();
+
+        if (either.isRight()) {
+
+            response = Response.status(Response.Status.CREATED).entity(either.right().value()).build();
+
+        } else {
+
+            IException exception = either.left().value();
+            response = Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(exception).build();
+
+        }
+
+        return response;        
+    }
 }

@@ -27,6 +27,29 @@ public class SensorBusiness {
         return Either.right(output);
     }
     
+    public Either<IException, String> getEmg() {
+        
+        String[] command = {"/bin/bash","-c","/home/pi/ardupi/cooking/arduPi/electromio"};
+
+        String output = executeCommand(command);
+
+        System.out.println(output);
+
+        return Either.right(output);
+    }
+    
+
+    public Either<IException, String> getEcg() {
+        
+        String[] command = {"/bin/bash","-c","/home/pi/ardupi/cooking/arduPi/electro"};
+
+        String output = executeCommand(command);
+
+        System.out.println(output);
+
+        return Either.right(output);
+    }
+    
     private String executeCommand(String[] command) {
 
         StringBuffer output = new StringBuffer();

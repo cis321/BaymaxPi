@@ -1,15 +1,15 @@
 /*
  *  eHealth sensor platform for Arduino and Raspberry from Cooking-hacks.
  *
- *  Description: "The e-Health Sensor Shield allows Arduino and Raspberry Pi 
- *  users to perform biometric and medical applications by using 9 different 
+ *  Description: "The e-Health Sensor Shield allows Arduino and Raspberry Pi
+ *  users to perform biometric and medical applications by using 9 different
  *  sensors: Pulse and Oxygen in Blood Sensor (SPO2), Airflow Sensor (Breathing),
  *  Body Temperature, Electrocardiogram Sensor (ECG), Glucometer, Galvanic Skin
- *  Response Sensor (GSR - Sweating), Blood Pressure (Sphygmomanometer) and 
+ *  Response Sensor (GSR - Sweating), Blood Pressure (Sphygmomanometer) and
  *  Patient Position (Accelerometer)."
  *
  *  In this example we read the values in volts of EMG sensor and show
- *  these values in the serial monitor. 
+ *  these values in the serial monitor.
  *
  *  Copyright (C) 2012 Libelium Comunicaciones Distribuidas S.L.
  *  http://www.libelium.com
@@ -36,7 +36,7 @@
 
 // The setup routine runs once when you press reset:
 void setup() {
-  Serial.begin(115200);  
+  Serial.begin(115200);
 }
 
 // The loop routine runs over and over again forever:
@@ -44,14 +44,20 @@ void loop() {
 
   int EMG = eHealth.getEMG();
 
-  printf("EMG value :  ");
-  printf("%d\n",EMG);  
+  printf("\"value\" :  %f",EMG);
 
-  delay(100);	// wait for a millisecond
+  delay(1000);	// wait for a millisecond
 }
 
 int main(){
-	setup();
-	while(1) loop();
+  printf("[{");
+	for(int i = 0; i<9; i++){
+		loop();
+    if((i+1)==9){
+    } else {
+      printf(",");
+    }
+	}
+  printf("}]");
 	return 0;
 }

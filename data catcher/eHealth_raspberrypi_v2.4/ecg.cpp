@@ -45,16 +45,14 @@ void loop() {
 
 int main (){
 	//setup();
-  printf("[");
+  printf("[{");
 	for(int i = 0; i<9; i++){
-    printf("{");
 		loop();
     if((i+1)==9){
-      printf("}");
     } else {
-      printf("},");
+      printf(",");
     }
 	}
-  printf("]");
+  printf("}]");
 	return (0);
 }
