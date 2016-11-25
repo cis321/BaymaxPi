@@ -2,8 +2,22 @@
 baymaxPiApp.controller('RegCtrl', function ($scope, $state, LoginService, $ionicPopup) {
     $scope.data = {};
 
+
+    $scope.isMedico = false;
+    $scope.isPaciente = false;
+
     $scope.createUser = function () {
-      LoginService.createUser({}, $scope.data, createUserSuccess, createUserError);
+        LoginService.createUser({}, $scope.data, createUserSuccess, createUserError);
+    }
+
+    $scope.isMedicoSelected = function () {
+        $scope.isMedico = true;
+        $scope.isPaciente = false;
+    }
+
+    $scope.isPacienteSelected = function () {
+        $scope.isMedico = false;
+        $scope.isPaciente = true;
     }
 
     function createUserSuccess () {

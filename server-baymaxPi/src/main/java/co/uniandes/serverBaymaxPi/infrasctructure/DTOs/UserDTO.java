@@ -19,9 +19,14 @@ public class UserDTO {
     
     private final String contrasena;
     
+    private final String tipoUsuario;
+    
+    private final String tarjeta;
+    
     @JsonCreator
     public UserDTO(@JsonProperty("username")String username, @JsonProperty("cedula")String cedula, @JsonProperty("edad")int edad, 
-            @JsonProperty("email")String email, @JsonProperty("eps")String eps, @JsonProperty("celular")String celular, @JsonProperty("contrasena")String contrasena){
+            @JsonProperty("email")String email, @JsonProperty("eps")String eps, @JsonProperty("celular")String celular, @JsonProperty("contrasena")String contrasena,
+            @JsonProperty("tipoUsuario")String tipoUsuario, @JsonProperty("tarjeta")String tarjeta){
         
         this.username = username;
         this.cedula = cedula;
@@ -30,6 +35,8 @@ public class UserDTO {
         this.eps = eps;
         this.celular = celular;
         this.contrasena = contrasena;
+        this.tipoUsuario = tipoUsuario;
+        this.tarjeta = tarjeta;
     }
 
     public String getUsername() {
@@ -58,5 +65,13 @@ public class UserDTO {
 
     public String getContrasena() {
         return contrasena;
+    }
+    
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+    
+    public String getTarjeta() {
+        return tarjeta;
     }
 }
