@@ -46,4 +46,8 @@ public class AuthorizationBusiness {
         
         return Either.left(new BusinessException("Unathorized", null)); 
     }
+
+    public Either<IException, Boolean> updateUser(UserDTO userDTO) {
+        return authorizationDataMapper.updateUser(userDTO, mongoDatabase);
+    }
 }

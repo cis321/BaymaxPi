@@ -50,6 +50,25 @@ public class AuthorizationResource {
         }
     }
     
+    @POST
+    @Path("/updateUser")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updateUser(UserDTO userDTO) {
+
+        Either<IException, Boolean> either = authorizationBusiness.updateUser(userDTO);
+
+        if (either.isRight()) {
+
+            return Response.status(Response.Status.CREATED).entity(either.right().value()).build();
+
+        } else {
+
+            IException exception = either.left().value();
+            int statusCode = exceptionCodes.getStatusCode(exception);
+            return Response.status(statusCode).entity(exception).build();
+        }
+    }
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response createUser(@QueryParam("username") String username, @QueryParam("contrasena") String contrasena) {

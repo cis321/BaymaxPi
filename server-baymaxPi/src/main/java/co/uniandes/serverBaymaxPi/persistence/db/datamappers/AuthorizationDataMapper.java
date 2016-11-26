@@ -71,4 +71,27 @@ public class AuthorizationDataMapper {
             return Either.left(technicalException);
         }
     }
+
+    public Either<IException, Boolean> updateUser(UserDTO userDTO, MongoDatabase mongoDatabase) {
+
+        try {
+
+            String requestCreatedJson = objectMapper.writeValueAsString(userDTO);
+            @SuppressWarnings("unchecked")
+            Map<String, Object> mapNewUser = (Map<String, Object>) JSON.parse(requestCreatedJson);
+            Document documentUser = new Document(mapNewUser);
+            MongoCollection<Document> requestsCollection = mongoDatabase.getCollection(USERS_COLLECTION);
+            
+            BasicDBObject query = new BasicDBObject("username", userDTO.getUsername());
+            
+            requestsCollection.replaceOne(query, documentUser);
+            return Either.right(true);
+
+        } catch (Exception e) {
+
+            TechnicalException technicalException = new TechnicalException(e.getMessage(), e);
+            e.printStackTrace();
+            return Either.left(technicalException);
+        }
+    }
 }

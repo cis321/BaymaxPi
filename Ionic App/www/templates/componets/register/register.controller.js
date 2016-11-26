@@ -28,7 +28,7 @@ baymaxPiApp.controller('RegCtrl', function ($scope, $state, LoginService, $ionic
       $state.go('login');
     }
 
-    function createUserError (response) {
+    function createUserError () {
       $ionicPopup.alert({
         title: 'User creation faild!',
         template: 'Try later!',

@@ -15,6 +15,11 @@ baymaxPiApp.factory('LoginService', ['$resource',
               method: 'GET',
               isArray: false,
             },
+            updateUser: {
+                method: 'POST',
+                isArray: false,
+                url: url + '/updateUser',
+            },
         };
 
         return $resource(url, defaultParams, actions);
