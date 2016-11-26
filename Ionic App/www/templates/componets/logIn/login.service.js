@@ -20,6 +20,11 @@ baymaxPiApp.factory('LoginService', ['$resource',
                 isArray: false,
                 url: url + '/updateUser',
             },
+            getAllDisabledMedics: {
+                method: 'GET',
+                isArray: true,
+                url: url + '/disabledMedics',
+            },
         };
 
         return $resource(url, defaultParams, actions);

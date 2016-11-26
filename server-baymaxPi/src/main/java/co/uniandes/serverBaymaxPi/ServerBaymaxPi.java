@@ -19,11 +19,9 @@ import com.mongodb.client.MongoDatabase;
 
 import co.uniandes.serverBaymaxPi.api.resources.AuthorizationResource;
 import co.uniandes.serverBaymaxPi.domain.business.AuthorizationBusiness;
-import co.uniandes.serverBaymaxPi.domain.business.MedicalDataBusiness;
 import co.uniandes.serverBaymaxPi.infrasctructure.config.ContentManagerConfig;
 import co.uniandes.serverBaymaxPi.infrasctructure.config.MongoDBConfig;
 import co.uniandes.serverBaymaxPi.persistence.db.datamappers.AuthorizationDataMapper;
-import co.uniandes.serverBaymaxPi.persistence.db.datamappers.MedicalDataDataMapper;
 import io.dropwizard.Application;
 import io.dropwizard.java8.Java8Bundle;
 import io.dropwizard.setup.Bootstrap;
@@ -78,14 +76,11 @@ public class ServerBaymaxPi extends Application<ContentManagerConfig> {
         initializeCORSSettings(environment);
         configureJacksonObjectMapper(environment);
         ObjectMapper objectMapper = environment.getObjectMapper();
-        MedicalDataDataMapper contentDataMapper = new MedicalDataDataMapper(objectMapper);
-        MedicalDataBusiness contentBusiness = new MedicalDataBusiness(contentDataMapper, mongoDatabase);
         
         AuthorizationDataMapper authorizationDataMapper = new AuthorizationDataMapper(objectMapper);
         AuthorizationBusiness authorizationBusiness = new AuthorizationBusiness(authorizationDataMapper, mongoDatabase);
         AuthorizationResource authorizationResource = new AuthorizationResource(authorizationBusiness);
         
-        environment.jersey().register(contentBusiness);
         environment.jersey().register(authorizationResource);
     }
 

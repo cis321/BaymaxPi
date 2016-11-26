@@ -1,5 +1,7 @@
 package co.uniandes.serverBaymaxPi.api.resources;
 
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -74,6 +76,25 @@ public class AuthorizationResource {
     public Response createUser(@QueryParam("username") String username, @QueryParam("contrasena") String contrasena) {
 
         Either<IException, Document> either = authorizationBusiness.login(username, contrasena);
+
+        if (either.isRight()) {
+
+            return Response.status(Response.Status.OK).entity(either.right().value()).build();
+
+        } else {
+
+            IException exception = either.left().value();
+            int statusCode = exceptionCodes.getStatusCode(exception);
+            return Response.status(statusCode).entity(exception).build();
+        }
+    }
+    
+    @GET
+    @Path("/disabledMedics")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAllDisabledMedics() {
+
+        Either<IException, List<Document>> either = authorizationBusiness.getAllDisabledMedics();
 
         if (either.isRight()) {
 

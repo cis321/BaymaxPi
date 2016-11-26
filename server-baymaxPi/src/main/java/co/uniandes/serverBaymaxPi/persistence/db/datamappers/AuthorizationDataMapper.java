@@ -1,5 +1,7 @@
 package co.uniandes.serverBaymaxPi.persistence.db.datamappers;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.bson.Document;
@@ -30,7 +32,6 @@ public class AuthorizationDataMapper {
     public Either<IException, Boolean> createUser(UserDTO userDTO, MongoDatabase mongoDB) {
 
         try {
-
             String requestCreatedJson = objectMapper.writeValueAsString(userDTO);
             @SuppressWarnings("unchecked")
             Map<String, Object> mapNewUser = (Map<String, Object>) JSON.parse(requestCreatedJson);
@@ -49,7 +50,6 @@ public class AuthorizationDataMapper {
     public Either<IException, Document> getUserByUsername(String username, MongoDatabase mongoDB) {
 
         try {
-            
             MongoCollection<Document> requestsCollection = mongoDB.getCollection(USERS_COLLECTION);
 
             BasicDBObject query = new BasicDBObject("username", username);
@@ -61,12 +61,12 @@ public class AuthorizationDataMapper {
                 Document result = iterator.next();
                 return Either.right(result);
             }
-            
+
             return Either.left(new BusinessException("user not found", null));
-        
+
         } catch (Exception e) {
             e.printStackTrace();
-            
+
             TechnicalException technicalException = new TechnicalException(e.getMessage(), e);
             return Either.left(technicalException);
         }
@@ -81,9 +81,9 @@ public class AuthorizationDataMapper {
             Map<String, Object> mapNewUser = (Map<String, Object>) JSON.parse(requestCreatedJson);
             Document documentUser = new Document(mapNewUser);
             MongoCollection<Document> requestsCollection = mongoDatabase.getCollection(USERS_COLLECTION);
-            
+
             BasicDBObject query = new BasicDBObject("username", userDTO.getUsername());
-            
+
             requestsCollection.replaceOne(query, documentUser);
             return Either.right(true);
 
@@ -91,6 +91,34 @@ public class AuthorizationDataMapper {
 
             TechnicalException technicalException = new TechnicalException(e.getMessage(), e);
             e.printStackTrace();
+            return Either.left(technicalException);
+        }
+    }
+
+    public Either<IException, List<Document>> getAllDisabledMedics(MongoDatabase mongoDatabase) {
+        try {
+            MongoCollection<Document> requestsCollection = mongoDatabase.getCollection(USERS_COLLECTION);
+
+            BasicDBObject query = new BasicDBObject();
+            query.append("medico", true);
+            query.append("disabled", true);
+
+            MongoCursor<Document> iterator = requestsCollection.find(query).iterator();
+
+            List<Document> usersList = new ArrayList<Document>();
+
+            while (iterator.hasNext()) {
+
+                Document currentUser = (Document) iterator.next();
+                usersList.add(currentUser);
+            }
+
+            return Either.right(usersList);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+            TechnicalException technicalException = new TechnicalException(e.getMessage(), e);
             return Either.left(technicalException);
         }
     }

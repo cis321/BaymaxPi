@@ -1,5 +1,5 @@
 /* globals baymaxPiApp */
-baymaxPiApp.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
+baymaxPiApp.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('login', {
             url: '/login',
@@ -45,6 +45,12 @@ baymaxPiApp.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
         controller: 'StadisticsCtrl',
     })
 
+    .state('funcionario', {
+        url: '/funcionario',
+        templateUrl: 'templates/componets/funcionario/funcionario.html',
+        controller: 'FuncionarioCtrl',
+    })
+
     .state('main.admin', {
         url: 'main/admin',
         views: {
@@ -56,7 +62,7 @@ baymaxPiApp.config(function ($stateProvider, $urlRouterProvider, USER_ROLES) {
     });
 
     // Thanks to Ben Noblet!
-    $urlRouterProvider.otherwise(function ($injector, $location) {
+    $urlRouterProvider.otherwise(function ($injector) {
         var $state = $injector.get('$state');
         $state.go('login');
     });

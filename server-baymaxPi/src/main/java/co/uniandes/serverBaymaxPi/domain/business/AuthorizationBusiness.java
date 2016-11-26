@@ -1,5 +1,7 @@
 package co.uniandes.serverBaymaxPi.domain.business;
 
+import java.util.List;
+
 import org.bson.Document;
 
 import com.mongodb.client.MongoDatabase;
@@ -49,5 +51,10 @@ public class AuthorizationBusiness {
 
     public Either<IException, Boolean> updateUser(UserDTO userDTO) {
         return authorizationDataMapper.updateUser(userDTO, mongoDatabase);
+    }
+
+    public Either<IException, List<Document>> getAllDisabledMedics() {
+        
+        return authorizationDataMapper.getAllDisabledMedics(mongoDatabase);
     }
 }

@@ -224,3 +224,36 @@ WARN  [2016-11-26 17:11:10,440] io.dropwizard.setup.AdminEnvironment:
 INFO  [2016-11-26 17:11:10,446] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@1e9469b8{/server-baymaxpi/admin,null,AVAILABLE}
 INFO  [2016-11-26 17:11:10,449] org.eclipse.jetty.server.ServerConnector: Started ServerBaymaxPi@7026b7ee{HTTP/1.1}{0.0.0.0:9050}
 INFO  [2016-11-26 17:11:20,027] org.mongodb.driver.connection: Opened connection [connectionId{localValue:2, serverValue:102}] to localhost:27017
+INFO  [2016-11-26 20:28:46,670] org.mongodb.driver.cluster: Cluster created with settings {hosts=[localhost:27017], mode=MULTIPLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+INFO  [2016-11-26 20:28:46,671] org.mongodb.driver.cluster: Adding discovered server localhost:27017 to client view of cluster
+INFO  [2016-11-26 20:28:46,700] io.dropwizard.server.ServerFactory: Starting ServerBaymaxPi
+INFO  [2016-11-26 20:28:46,803] org.eclipse.jetty.setuid.SetUIDListener: Opened ServerBaymaxPi@5a00eb1e{HTTP/1.1}{0.0.0.0:9050}
+INFO  [2016-11-26 20:28:46,805] org.eclipse.jetty.server.Server: jetty-9.0.7.v20131107
+INFO  [2016-11-26 20:28:46,899] com.sun.jersey.server.impl.application.WebApplicationImpl: Initiating Jersey application, version 'Jersey: 1.18.1 02/19/2014 03:28 AM'
+INFO  [2016-11-26 20:28:46,919] org.mongodb.driver.connection: Opened connection [connectionId{localValue:1, serverValue:103}] to localhost:27017
+INFO  [2016-11-26 20:28:46,920] org.mongodb.driver.cluster: Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 2, 10]}, minWireVersion=0, maxWireVersion=4, maxDocumentSize=16777216, roundTripTimeNanos=667347}
+INFO  [2016-11-26 20:28:46,921] org.mongodb.driver.cluster: Discovered cluster type of STANDALONE
+INFO  [2016-11-26 20:28:46,970] io.dropwizard.jersey.DropwizardResourceConfig: The following paths were found for the configured resources:
+
+    GET     /authorization (co.uniandes.serverBaymaxPi.api.resources.AuthorizationResource)
+    GET     /authorization/disabledMedics (co.uniandes.serverBaymaxPi.api.resources.AuthorizationResource)
+    POST    /authorization (co.uniandes.serverBaymaxPi.api.resources.AuthorizationResource)
+    POST    /authorization/updateUser (co.uniandes.serverBaymaxPi.api.resources.AuthorizationResource)
+
+INFO  [2016-11-26 20:28:47,196] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@ae2db25{/server-baymaxpi/api,null,AVAILABLE}
+INFO  [2016-11-26 20:28:47,199] io.dropwizard.setup.AdminEnvironment: tasks = 
+
+    POST    /tasks/gc (io.dropwizard.servlets.tasks.GarbageCollectionTask)
+
+WARN  [2016-11-26 20:28:47,199] io.dropwizard.setup.AdminEnvironment: 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!    THIS APPLICATION HAS NO HEALTHCHECKS. THIS MEANS YOU WILL NEVER KNOW      !
+!     IF IT DIES IN PRODUCTION, WHICH MEANS YOU WILL NEVER KNOW IF YOU'RE      !
+!    LETTING YOUR USERS DOWN. YOU SHOULD ADD A HEALTHCHECK FOR EACH OF YOUR    !
+!         APPLICATION'S DEPENDENCIES WHICH FULLY (BUT LIGHTLY) TESTS IT.       !
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+INFO  [2016-11-26 20:28:47,204] org.eclipse.jetty.server.handler.ContextHandler: Started i.d.j.MutableServletContextHandler@2d3ef181{/server-baymaxpi/admin,null,AVAILABLE}
+INFO  [2016-11-26 20:28:47,208] org.eclipse.jetty.server.ServerConnector: Started ServerBaymaxPi@5a00eb1e{HTTP/1.1}{0.0.0.0:9050}
+INFO  [2016-11-26 20:28:49,743] org.mongodb.driver.connection: Opened connection [connectionId{localValue:2, serverValue:104}] to localhost:27017
