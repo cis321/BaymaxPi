@@ -22,7 +22,18 @@
             <label class="item item-input">
                 <input type="password" placeholder="Contraseña" ng-model="data.contrasena">
             </label>
+            <br>
+            Que tipo de Usuario eres?
+            <ion-radio ng-click="isPacienteSelected()" ng-model="data.tipoUsuario" ng-value="'Paciente'">Paciente</ion-radio>
+            <ion-radio ng-click="isMedicoSelected()" ng-model="data.tipoUsuario" ng-value="'Médico'">Médico</ion-radio>
+            <br>
+            <label class="item item-input" ng-if="isMedico">
+                <input type="number" placeholder="Tarjeta" ng-model="data.tarjeta">
+            </label>
+
+
         </div>
+
         <button class="button button-block button-energized" ng-click="createUser(data)">Registrarme!</button>
     </ion-content>
 </ion-view>

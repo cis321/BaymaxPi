@@ -1,7 +1,7 @@
 /**
  * Created by ASUS on 30/10/2016.
  */
-baymaxPiApp.controller('DashCtrl', function ($scope, $state) {
+baymaxPiApp.controller('DashCtrl', function ($scope, $state, AuthService) {
     $scope.data = {};
 
     $scope.goProfile = function () {
@@ -10,5 +10,9 @@ baymaxPiApp.controller('DashCtrl', function ($scope, $state) {
 
     $scope.goStatistics = function () {
         $state.go('statistics');
+    };
+
+    $scope.logout = function () {
+       AuthService.logout();
     };
 })

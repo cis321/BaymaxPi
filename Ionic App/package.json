@@ -1,5 +1,5 @@
 {
-  "name": "pruebaconexion",
+  "name": "BaymaxPi",
   "version": "1.1.1",
   "description": "pruebaConexion: An Ionic project",
   "dependencies": {
@@ -18,7 +18,5 @@
     "cordova-plugin-whitelist",
     "cordova-plugin-dialogs"
   ],
-  "cordovaPlatforms": [
-    "android"
-  ]
+  "cordovaPlatforms": []
 }
