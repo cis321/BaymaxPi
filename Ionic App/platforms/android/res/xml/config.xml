@@ -15,12 +15,10 @@
         Testing connection to the MTC platform
     </description>
     <author email="jjrg1994@gmail.com" href="http://github.com/juaoose">
-        Your Name Here
+      Your Name Here
     </author>
     <content src="index.html" />
     <access origin="*" />
-    <access launch-external="yes" origin="tel:*" />
-    <allow-intent href="tel:*" />
     <allow-navigation href="http://*/*" />
     <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
     <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
