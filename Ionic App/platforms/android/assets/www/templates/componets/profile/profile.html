@@ -12,7 +12,7 @@
         <div class="row"><div class="col text-center">
             <h3 class="title">{{data.username}}, Este es tu Perfil.</h3>
             <br><br><br>
-            <h2 class="text-left" ng-if="!isEditable">
+            <h2 class="text-left">
                 Nombre: {{data.username}}
             </h2>
             <h2 class="text-left" ng-if="!isEditable">
@@ -31,26 +31,28 @@
                 EPS: {{data.eps}}
             </h2>
 
-            <label class="item item-input"  ng-if="isEditable">
-                <input type="text" placeholder="Nombre del usuario" ng-model="data.username">
+            <label class="item item-input" ng-if="isEditable">
+                Cédula:&nbsp
+                <input type="text" placeholder="Cédula" ng-model="data.cedula">
             </label>
             <label class="item item-input" ng-if="isEditable">
-                <input type="number" placeholder="Cédula" ng-model="data.cedula">
-            </label>
-            <label class="item item-input" ng-if="isEditable">
+                Edad:&nbsp
                 <input type="number" placeholder="Edad" ng-model="data.edad">
             </label>
             <label class="item item-input" ng-if="isEditable">
+                Correo Electrónico:&nbsp
                 <input type="email" placeholder="Correo Electrónico" ng-model="data.email">
             </label>
             <label class="item item-input" ng-if="isEditable">
-                <input type="text" placeholder="E.P.S" ng-model="data.eps">
+                E.P.S.:&nbsp
+                <input type="text" placeholder="E.P.S." ng-model="data.eps">
             </label>
             <label class="item item-input" ng-if="isEditable">
-                <input type="number" placeholder="Teléfono Celular" ng-model="data.celular">
+                Teléfono Celular:&nbsp
+                <input type="text" placeholder="Teléfono Celular" ng-model="data.celular">
             </label>
             <br><br>
         </div></div>
-        <button class="button button-block button-energized" ng-click="createUser(data)">Guardar los cambios!</button>
+        <button ng-if="isEditable" class="button button-block button-energized" ng-click="updateUser(data)">Guardar los cambios!</button>
     </ion-content>
 </ion-view>

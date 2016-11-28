@@ -3,7 +3,7 @@
 /* globals baymaxPiApp */
 baymaxPiApp.factory('LoginService', ['$resource',
     function ($resource) {
-        var url = 'http://localhost:9050/server-baymaxpi/api/authorization';
+        var url = 'http://172.20.10.3:9050/server-baymaxpi/api/authorization';
         var defaultParams = {};
 
         var actions = {

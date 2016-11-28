@@ -11,27 +11,31 @@ baymaxPiApp.controller('RegCtrl', function ($scope, $state, LoginService, $ionic
     }
 
     $scope.isMedicoSelected = function () {
+        $scope.data.medico = true;
+        $scope.data.disabled = true;
         $scope.isMedico = true;
         $scope.isPaciente = false;
     }
 
     $scope.isPacienteSelected = function () {
+        $scope.data.medico = false;
+        $scope.data.disabled = false;
         $scope.isMedico = false;
         $scope.isPaciente = true;
     }
 
     function createUserSuccess () {
-      $ionicPopup.alert({
-        title: 'User creation succes!',
-        template: 'Now you can login',
-      });
-      $state.go('login');
+        $ionicPopup.alert({
+            title: 'User creation succes!',
+            template: 'Now you can login',
+        });
+        $state.go('login');
     }
 
-    function createUserError (response) {
-      $ionicPopup.alert({
-        title: 'User creation faild!',
-        template: 'Try later!',
-      });
+    function createUserError () {
+        $ionicPopup.alert({
+            title: 'User creation faild!',
+            template: 'Try later!',
+        });
     }
 })

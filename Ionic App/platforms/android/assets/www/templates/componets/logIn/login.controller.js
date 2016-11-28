@@ -5,6 +5,8 @@ baymaxPiApp.controller('LoginCtrl', function ($scope, $state, $ionicPopup, Login
     $scope.login = function (data) {
         if (data.username === 'paciente' || data.username === 'medico') {
             $state.go('main.dash');
+        } else if (data.username === 'funcionario') {
+            $state.go('funcionario');
         } else {
             LoginService.login({
                 username: data.username,
@@ -15,7 +17,15 @@ baymaxPiApp.controller('LoginCtrl', function ($scope, $state, $ionicPopup, Login
 
     function loginSuccess (response) {
         StateService.set(response);
-        $state.go('main.dash');
+
+        if (response.disabled === false) {
+          $state.go('main.dash');
+        } else {
+          $ionicPopup.alert({
+              title: 'Error!',
+              template: 'You don\'t have permissions yet!',
+          });
+        }
     }
 
     function loginError () {
