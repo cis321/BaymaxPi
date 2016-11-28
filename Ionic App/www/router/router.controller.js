@@ -15,6 +15,7 @@ baymaxPiApp.config(function ($stateProvider, $urlRouterProvider) {
             url: '/',
             abstract: true,
             templateUrl: 'templates/main.html',
+            controller: 'AppCtrl',
         })
         .state('main.dash', {
             url: 'main/dash',

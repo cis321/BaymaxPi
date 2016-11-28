@@ -1,16 +1,21 @@
 /* globals baymaxPiApp */
-baymaxPiApp.controller('StadisticsCtrl', function ($scope, $http, $timeout) {
-$scope.data;
+baymaxPiApp.controller('StadisticsCtrl', function ($scope, $http, $timeout, $ionicHistory, $cordovaGeolocation) {
+  $scope.data;
   $scope.dataEcg;
   $scope.dataEmg;
   $scope.labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   $scope.series = ['Diastolic', 'Systolic', 'Pulse'];
   $scope.seriesEcg = ['ECG'];
   $scope.seriesEmg = ['EMG'];
+  $scope.ubicacion = "";
 
   $scope.stateG1 = false;
   $scope.stateG2 = false;
   $scope.stateG3 = false;
+
+  $scope.back = function () {
+        $ionicHistory.goBack();
+    }
 
   $scope.click1 = function(){
     $scope.stateG1 = !$scope.stateG1; 
@@ -145,6 +150,13 @@ $scope.data;
       for (var i = 0; i < alertArray.length; i++) {
         dataContent1 = JSON.parse(atob(alertArray[i].content.binaryContent));
         $scope.response ='Problema con su ' + dataContent1.problem + ' con un valor de ' + dataContent1.value;
+
+          var posOptions = {timeout: 10000, enableHighAccuracy: false};
+          $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+              var lat  = position.coords.latitude
+              var long = position.coords.longitude
+              $scope.ubicacion = lat + ", " + long;
+          });
       }
 
     }, function errorCallback(response) {

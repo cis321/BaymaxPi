@@ -14,5 +14,6 @@ baymaxPiApp.controller('DashCtrl', function ($scope, $state, AuthService) {
 
     $scope.logout = function () {
        AuthService.logout();
+       $state.go('login');
     };
 })

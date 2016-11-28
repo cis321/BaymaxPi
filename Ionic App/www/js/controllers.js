@@ -1,7 +1,9 @@
 angular.module('starter')
 
-    .controller('AppCtrl', function ($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS) {
+    .controller('AppCtrl', function ($scope, $state, $ionicPopup, AuthService, AUTH_EVENTS, StateService) {
         $scope.username = AuthService.username();
+
+        $scope.data = StateService.get();
 
         $scope.$on(AUTH_EVENTS.notAuthorized, function (event) {
             var alertPopup = $ionicPopup.alert({
@@ -21,6 +23,19 @@ angular.module('starter')
 
         $scope.setCurrentUsername = function (name) {
             $scope.username = name;
+        };
+
+        $scope.siEsMedico = function () {
+            if(data.tipoUsuario === 'Médico')
+            {
+                return true;
+
+            }
+            else if(data.tipoUsuario === 'Paciente')
+            {
+                return false;
+
+            }
         };
     })
 

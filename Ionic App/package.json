@@ -16,7 +16,8 @@
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",
-    "cordova-plugin-dialogs"
+    "cordova-plugin-dialogs",
+    "cordova-plugin-geolocation"
   ],
   "cordovaPlatforms": []
 }

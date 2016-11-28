@@ -1,4 +1,7 @@
 <ion-view view-title="Statistics" name="statistics-view">
+    <ion-nav-buttons side="left">
+        <button class="button icon-left ion-arrow-left-c button-stable" ng-click="back()">Back</button>
+    </ion-nav-buttons>
     <ion-pane>
         <ion-header-bar class="bar-stable">
             <h1 class="title">eHealth</h1>
@@ -10,6 +13,9 @@
             <div class="card">
                 <div class="item item-text-wrap">
                     Última alarmaXXX: <b ng-bind="response"></b>
+                </div>
+                <div class="item item-text-wrap">
+                    Ubicación: <b ng-bind="ubicacion"></b>
                 </div>
             </div>
             <!-- Graph -->
