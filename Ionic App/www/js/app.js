@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 
 /* globals window, cordova, StatusBar, angular */
-var baymaxPiApp = angular.module('starter', ['ionic', 'ngResource', 'chart.js', ])
+var baymaxPiApp = angular.module('starter', ['ionic', 'ngResource', 'chart.js', 'ngCordova'])
 
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
@@ -24,6 +24,6 @@ var baymaxPiApp = angular.module('starter', ['ionic', 'ngResource', 'chart.js', 
             StatusBar.styleDefault();
         }
 
-        angular.module('starter', ['ionic', 'ngResource', ]);
+        angular.module('starter', ['ionic', 'ngResource', 'ngCordova']);
     });
 })

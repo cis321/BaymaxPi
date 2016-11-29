@@ -12,10 +12,17 @@
             </ion-refresher>
             <div class="card">
                 <div class="item item-text-wrap">
-                    Última alarmaXXX: <b ng-bind="response"></b>
+                    Última alarma: <b ng-bind="response"></b>
                 </div>
-                <div class="item item-text-wrap">
-                    Ubicación: <b ng-bind="ubicacion"></b>
+                <div class="card">
+                    <div class="item item-divider" ng-click="click4()">
+                        Ubicación: <b ng-bind="ubicacion"></b>
+                    </div>
+                    <div class="item item-text-wrap" ng-show="stateG4">
+                        <ion-content ng-controller="MapController">
+                            <div id="map" data-tap-disabled="true"></div>
+                        </ion-content>
+                    </div>
                 </div>
             </div>
             <!-- Graph -->

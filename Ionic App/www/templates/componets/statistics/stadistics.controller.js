@@ -12,6 +12,7 @@ baymaxPiApp.controller('StadisticsCtrl', function ($scope, $http, $timeout, $ion
   $scope.stateG1 = false;
   $scope.stateG2 = false;
   $scope.stateG3 = false;
+  $scope.stateG4 = false;
 
   $scope.back = function () {
         $ionicHistory.goBack();
@@ -27,6 +28,9 @@ baymaxPiApp.controller('StadisticsCtrl', function ($scope, $http, $timeout, $ion
 
   $scope.click3 = function () {
     $scope.stateG3 = !$scope.stateG3;
+  }
+  $scope.click4 = function () {
+        $scope.stateG4 = !$scope.stateG4;
   }
 
   $scope.doRefresh = function () {

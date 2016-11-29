@@ -62,6 +62,35 @@ angular.module('starter')
 })*/
 
 
+    .controller('MapController', function ($scope, $cordovaGeolocation) {
+        var posOptions = {
+            enableHighAccuracy: false,
+            timeout: 5000,
+            maximumAge: 0
+        };
+
+        $cordovaGeolocation.getCurrentPosition(posOptions).then(function (position) {
+            var lat  = position.coords.latitude;
+            var long = position.coords.longitude;
+
+            var myLatlng = new google.maps.LatLng(lat, long);
+
+            var mapOptions = {
+                center: myLatlng,
+                zoom: 16,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            $scope.map = map;
+
+        }, function(err) {
+            console.log(err);
+        });
+    })
+
+
 .controller('LoginCtrl', function($scope, $state, $ionicPopup, AuthService) {
     $scope.data = {};
 
